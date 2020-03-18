@@ -17,6 +17,8 @@ dependencies:
   equatable: 1.1.0
   meta: 1.1.8
   shared_preferences: ^0.5.6+3
+#  assets_audio_player: ^1.2.3
+  flutter_svg: ^0.17.3+1
 
 dev_dependencies:
   flutter_test:
@@ -26,5 +28,28 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/svg/
+    - assets/sounds/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+          weight: 100
+        - asset: assets/fonts/Poppins-Thin.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 900
+
 flutter_intl:
   enabled: true

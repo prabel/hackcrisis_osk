@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osk_flutter/generated/l10n.dart';
+import 'package:osk_flutter/view/main/main_navigation_page.dart';
 
 class OskApplication extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class OskApplication extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      home: MainNavigationPage(),
     );
   }
 }
