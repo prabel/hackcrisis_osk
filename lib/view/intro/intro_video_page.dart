@@ -19,7 +19,7 @@ class IntroVideoPage extends StatelessWidget {
             FlatButton(
               child: Text("Rozpocznij"),
               onPressed: () {
-                Navigator.pushReplacement(context, IntroStepOnePage.pageRoute);
+                Navigator.pushReplacement(context, IntroStepOnePage.pageRoute());
               },
             )
           ],

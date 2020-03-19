@@ -7,29 +7,42 @@ enum IntroAppBarTheme { light, dark }
 class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IntroAppBarTheme appBarTheme;
 
-  const IntroAppBar({Key key, this.appBarTheme = IntroAppBarTheme.light}) : super(key: key);
+  const IntroAppBar({Key key, this.appBarTheme = IntroAppBarTheme.dark}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        height: preferredSize.height,
-        width: double.infinity,
-        child: Center(
-          child: Row(
+    return Container(
+      height: preferredSize.height,
+      width: double.infinity,
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              SizedBox(width: 22),
-              Text(
-                "Osobisty System\nKomunikacji",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: appBarTheme == IntroAppBarTheme.light ? Colors.white : Colors.black,
-                ),
+              Row(
+                children: <Widget>[
+                  Text(
+                    "Osobisty System\nKomunikacji",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: appBarTheme == IntroAppBarTheme.light ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  const Spacer(),
+                  SvgPicture.asset(
+                      appBarTheme == IntroAppBarTheme.light ? AppImages.logoGovWhite : AppImages.logoGovBlack),
+                ],
               ),
-              const Spacer(),
-              SvgPicture.asset(appBarTheme == IntroAppBarTheme.light ? AppImages.logoGovWhite : AppImages.logoGovBlack),
-              SizedBox(width: 16),
+              SizedBox(height: 24),
+              Container(
+                height: 2.5,
+                width: 34,
+                color: appBarTheme == IntroAppBarTheme.light ? Colors.white : Color(0XFFCFCFCF),
+              )
             ],
           ),
         ),
@@ -38,5 +51,5 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(86);
+  Size get preferredSize => Size.fromHeight(130);
 }

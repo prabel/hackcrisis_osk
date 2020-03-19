@@ -8,7 +8,7 @@ class SplashPage extends StatelessWidget {
       body: Center(
         child: FlatButton(
           child: Text("Przejdz to intro"),
-          onPressed: () => Navigator.pushReplacement(context, IntroPage.pageRoute),
+          onPressed: () => Navigator.pushReplacement(context, IntroPage.pageRoute()),
         ),
       ),
     );

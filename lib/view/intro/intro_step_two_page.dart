@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:osk_flutter/values/app_colors.dart';
+import 'package:osk_flutter/values/app_images.dart';
+import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
-import 'package:osk_flutter/view/main/main_navigation_page.dart';
+import 'package:osk_flutter/view/surveys/health_status_survey_page.dart';
 
 class IntroStepTwoPage extends StatelessWidget {
-  static MaterialPageRoute pageRoute = MaterialPageRoute(builder: (BuildContext context) => IntroStepTwoPage());
+  static MaterialPageRoute pageRoute() => MaterialPageRoute(builder: (BuildContext context) => IntroStepTwoPage());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
       appBar: const IntroAppBar(),
+      body: Stack(
+        children: <Widget>[
+          SvgPicture.asset(AppImages.background),
+          const _IntroStepTwoBody(),
+        ],
+      ),
     );
   }
 }
@@ -32,36 +41,75 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
     return Form(
       key: _formKey,
       autovalidate: _shouldAutoValidate,
-      child: Column(
-        children: <Widget>[
-          Text("Poznajmy się 2/2"),
-          Spacer(),
-          Text("Podaj rok twojego urodzenia"),
-          TextFormField(
-              controller: _nameTextController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-              )),
-          const SizedBox(height: 32),
-          Center(
-            child: FlatButton(
-              child: Text(
-                "Dalej",
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 22),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 42),
+            Text(
+              "Poznajmy się",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  Navigator.of(context)
-                    ..popUntil((_) => false)
-                    ..push(MainNavigationPage.pageRoute);
-                } else {
-                  setState(() {
-                    _shouldAutoValidate = true;
-                  });
+            ),
+            const SizedBox(height: 12),
+            Text(
+              "Ile masz lat?",
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 36),
+            TextFormField(
+              controller: _nameTextController,
+              autofocus: true,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                filled: true,
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+              ),
+              validator: (text) {
+                if (text.isEmpty) {
+                  return "Podaj swój wiek";
                 }
+                return null;
               },
             ),
-          )
-        ],
+            const Spacer(),
+            Row(
+              children: <Widget>[
+                BackButton(
+                  color: AppColors.primaryBlue,
+                ),
+                Spacer(),
+                SizedBox(
+                  width: 215,
+                  child: PrimaryButton(
+                    title: "Dalej",
+                    onClick: () {
+                      if (_formKey.currentState.validate()) {
+                        Navigator.push(context, HealthStatusSurveyPage.pageRoute());
+                      } else {
+                        setState(() {
+                          _shouldAutoValidate = true;
+                        });
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 70),
+          ],
+        ),
       ),
     );
   }

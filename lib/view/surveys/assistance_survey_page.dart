@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 import 'package:osk_flutter/view/surveys/elements/one_choice_qustion_widget.dart';
+import 'package:osk_flutter/view/surveys/elements/question_choice_item.dart';
 
 const List<QuestionChoiceOption> healthStatusOptions = [
-  QuestionChoiceOption("1", "Nie, nie potrzebuję", indicatorColor: Colors.green),
-  QuestionChoiceOption("2", "Potrzebuję pomocy z zakupami", indicatorColor: Colors.yellow),
-  QuestionChoiceOption("3", "Prebywam za granica", indicatorColor: Colors.yellow),
-  QuestionChoiceOption("4", "Trudna sytuacja życiowa", indicatorColor: Colors.yellow),
+  QuestionChoiceOption("1", "Nie, nie potrzebuję", [Colors.green]),
+  QuestionChoiceOption("2", "Potrzebuję pomocy z zakupami", [Colors.yellow]),
+  QuestionChoiceOption("3", "Prebywam za granica", [Colors.yellow]),
+  QuestionChoiceOption("4", "Trudna sytuacja życiowa", [Colors.yellow]),
 ];
 
 class AssistanceSurveyPage extends StatelessWidget {
