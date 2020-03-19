@@ -102,3 +102,5 @@ ios/vendor/*
 android/vendor/*
 android/.cache/*
 android/android/.cache/*
+/ios/Runner/GoogleService-Info.plist
+/android/app/google-services.json

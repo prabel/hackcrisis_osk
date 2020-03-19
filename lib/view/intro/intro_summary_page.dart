@@ -68,7 +68,7 @@ class IntroSummaryPage extends StatelessWidget {
                     PrimaryButton(
                       title: "Dalej",
                       onClick: () {
-                        Navigator.pushReplacement(context, MainNavigationPage.pageRoute);
+                        Navigator.pushReplacement(context, MainNavigationPage.pageRoute());
                       },
                     ),
                     const SizedBox(height: 70),
