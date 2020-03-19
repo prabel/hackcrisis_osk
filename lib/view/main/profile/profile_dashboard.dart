@@ -133,11 +133,13 @@ class ProfileDashboard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            PrimaryButton(
-              width: 280,
-              height: 47,
-              title: "Zadzwoń: 89 767 23 22",
-              onClick: () {},
+            Center(
+              child: PrimaryButton(
+                width: 280,
+                height: 47,
+                title: "Zadzwoń: 89 767 23 22",
+                onClick: () {},
+              ),
             )
           ],
         ),

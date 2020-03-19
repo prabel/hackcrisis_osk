@@ -35,7 +35,7 @@ class _HealthStatusSurveyPageState extends State<HealthStatusSurveyPage> {
       appBar: const IntroAppBar(),
       body: Stack(
         children: <Widget>[
-          SvgPicture.asset(AppImages.backgroundPng),
+          Image.asset(AppImages.backgroundPng),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: Column(

@@ -18,7 +18,7 @@ List<MainPageDestination> mainPageDestinations = [
 ];
 
 class MainNavigationPage extends StatefulWidget {
-  static MaterialPageRoute pageRoute = MaterialPageRoute(builder: (BuildContext context) => MainNavigationPage());
+  static MaterialPageRoute pageRoute() => MaterialPageRoute(builder: (BuildContext context) => MainNavigationPage());
 
   @override
   _MainNavigationPageState createState() => _MainNavigationPageState();
