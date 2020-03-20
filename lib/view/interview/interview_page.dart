@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/interview/interview_form.dart';
@@ -17,39 +16,40 @@ class InterviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IntroAppBar(),
+      backgroundColor: Color(0XFFED0428),
+      appBar: const IntroAppBar(
+        appBarTheme: IntroAppBarTheme.light,
+      ),
       body: Stack(
         children: <Widget>[
-          SvgPicture.asset(AppImages.background),
+          Image.asset(AppImages.backgroundPng),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                if (interviewForm.title != null) ...[
-                  const SizedBox(height: 42),
+                const Spacer(),
+                const SizedBox(height: 42),
+                Text(
+                  "Podstawowy wywiad\nmedyczny",
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (interviewForm.question != null) ...[
+                  const SizedBox(height: 12),
                   Text(
-                    interviewForm.title,
+                    interviewForm.question,
                     style: TextStyle(
                       fontSize: 26,
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
-                if (interviewForm.subtitle != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    interviewForm.subtitle,
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: AppColors.darkGrey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
                 const SizedBox(height: 36),
-                const Spacer(),
                 Column(
                   children: interviewForm.answers.map((item) => _buildAnswerButton(item)).toList(),
                 ),
@@ -77,7 +77,7 @@ class InterviewPage extends StatelessWidget {
               answer.title,
               style: TextStyle(
                 fontSize: 18,
-                color: answer.isPrimaryAnswer ? Colors.white : AppColors.lightGrey,
+                color: answer.isPrimaryAnswer ? Colors.white : AppColors.darkGrey,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:osk_flutter/generated/l10n.dart';
-import 'package:osk_flutter/view/intro/intro_page.dart';
+import 'package:osk_flutter/view/main/main_navigation_page.dart';
 
 class OskApplication extends StatelessWidget {
   @override
@@ -17,7 +17,7 @@ class OskApplication extends StatelessWidget {
         primarySwatch: Colors.blue,
         pageTransitionsTheme: PageTransitionsTheme(builders: {TargetPlatform.iOS: CupertinoPageTransitionsBuilder()}),
       ),
-      home: IntroPage(),
+      home: MainNavigationPage(),
     );
   }
 }

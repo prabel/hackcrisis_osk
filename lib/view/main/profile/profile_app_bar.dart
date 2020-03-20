@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:osk_flutter/values/app_images.dart';
-import 'package:osk_flutter/values/health_statuses.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final HealthStatus healthStatus;
+  final Color backgroundColor;
+  final LinearGradient backgroundGradient;
 
-  const ProfileAppBar({Key key, @required this.title, this.healthStatus = HealthStatus.healthy}) : super(key: key);
+  const ProfileAppBar({Key key, @required this.title, this.backgroundColor, this.backgroundGradient}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,8 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
         height: 200,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: healthStatus.getColors(),
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ),
+          color: backgroundGradient == null ? backgroundColor : null,
+          gradient: backgroundGradient,
         ),
         child: Stack(
           children: <Widget>[

@@ -15,7 +15,11 @@ class ProfileDashboard extends StatelessWidget {
       children: <Widget>[
         ProfileAppBar(
           title: "Paweł",
-          healthStatus: currentHealthStatus,
+          backgroundGradient: LinearGradient(
+            colors: currentHealthStatus.getColors(),
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
         ),
         Expanded(
           child: SingleChildScrollView(
