@@ -1,0 +1,91 @@
+{
+  "statistics": {
+    "districts": {
+      "mazowieckie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 107
+      },
+      "dolnośląskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "łódzkie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "śląskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "lubelskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "podkarpackie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "wielkopolskie": {
+        "cured": 0,
+        "deaths": 1,
+        "infected": 18
+      },
+      "warmińsko-mazurskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 17
+      },
+      "małopolskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "kujawsko-pomorskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "opolskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "pomorskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 10
+      },
+      "lubuskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "zachodniopomorskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 9
+      },
+      "świętokrzyskie": {
+        "cured": 1,
+        "deaths": 5,
+        "infected": 425
+      },
+      "podlaskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 3
+      }
+    },
+    "poland": {
+      "cured": 1,
+      "deaths": 5,
+      "infected": 425
+    }
+  }
+}

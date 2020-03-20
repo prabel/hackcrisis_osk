@@ -49,12 +49,15 @@ class ChoiceItem extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Expanded(
-            child: Text(
-              questionChoiceOption.title,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              child: Text(
+                questionChoiceOption.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
@@ -63,7 +66,7 @@ class ChoiceItem extends StatelessWidget {
             Icons.check_circle,
             color: Colors.white,
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 12),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/view/main/information/information_dashboard.dart';
 import 'package:osk_flutter/view/main/profile/profile_dashboard.dart';
@@ -26,7 +27,18 @@ class MainNavigationPage extends StatefulWidget {
 }
 
 class _MainNavigationPageState extends State<MainNavigationPage> {
+  final Location location = Location();
+
   int _currentIndex = 2;
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+
+  @override
+  void initState() {
+    super.initState();
+    _handleLocationInitilization();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,5 +65,23 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
         });
       },
     );
+  }
+
+  Future<void> _handleLocationInitilization() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.DENIED) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.GRANTED) {
+        return;
+      }
+    }
   }
 }

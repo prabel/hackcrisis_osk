@@ -16,10 +16,10 @@ class AssistanceStatusHolder extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          Container(height: 44, width: 0),
+          Container(height: 60, width: 0),
           const SizedBox(width: 8),
           Container(
-            height: 36,
+            height: 44,
             width: 10,
             decoration: BoxDecoration(
               color: _assistanceStatus.getColors()[0],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:osk_flutter/data/firebase_repository.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/assistance_statuses.dart';
 import 'package:osk_flutter/view/main/information/assistance_informations_holder.dart';
 import 'package:osk_flutter/view/main/information/assistance_status_holder.dart';
+import 'package:osk_flutter/view/main/information/statistic/statistic_widget.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
 import 'package:osk_flutter/view/surveys/assistance_survey_page.dart';
 
@@ -48,8 +50,9 @@ class _InformationDashboardState extends State<InformationDashboard> {
                   ),
                   const SizedBox(height: 18),
                   _buildInformationsBaseOnStatuses(),
-                  const SizedBox(height: 40),
                 ],
+                const SizedBox(height: 24),
+                StatisticWidget(FirebaseRepository())
               ],
             ),
           )
