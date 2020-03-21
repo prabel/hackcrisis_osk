@@ -5,6 +5,7 @@ import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/values/health_statuses.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
+import 'package:osk_flutter/view/interview/interview_page.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 import 'package:osk_flutter/view/intro/intro_summary_page.dart';
 import 'package:osk_flutter/view/surveys/elements/one_choice_qustion_widget.dart';
@@ -85,7 +86,11 @@ class _HealthStatusSurveyPageState extends State<HealthStatusSurveyPage> {
       final UserModel currentUserModel = await userRepository.getCurrentUserModel();
       await userRepository.createOrUpdateUser(currentUserModel.copyWith(healthStatusId: selectedChoice.option.index));
 
-      Navigator.push(context, IntroSummaryPage.pageRoute(selectedChoice));
+      if (selectedChoice.option != HealthStatus.healthy) {
+        Navigator.pushReplacement(context, InterviewPage.pageRoute());
+      } else {
+        Navigator.pushReplacement(context, IntroSummaryPage.pageRoute(selectedChoice));
+      }
     }
   }
 }

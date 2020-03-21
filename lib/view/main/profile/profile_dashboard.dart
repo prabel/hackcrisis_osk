@@ -9,6 +9,7 @@ import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
 import 'package:osk_flutter/view/quiz/quiz_intro_page.dart';
 import 'package:osk_flutter/view/surveys/health_status_survey_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileDashboard extends StatefulWidget {
   const ProfileDashboard({Key key}) : super(key: key);
@@ -18,8 +19,14 @@ class ProfileDashboard extends StatefulWidget {
 }
 
 class _ProfileDashboardState extends State<ProfileDashboard> {
+  static const String kPositiveDiagnosisText =
+      "Twoje objawy nie wskazują na koronawirusa. Nie musisz dzwonić do stacji epidemiologicznej. Objawy grypy lecz lekami antygrypowymi. Pamiętaj o zachowaniu izolacji od innych domowników. Jeśli poczujesz się gorzej, zadzwoń po pomoc medyczną.";
+  static const String kNegativeDiagnosisText =
+      "Kwarantanna to trudne wyzwanie, ale możesz liczyć na wsparcie psychologiczne i medyczne. Więcej dowiesz się w zakładce 'informacje'. Jeśli nagle poczujesz się gorzej zadzwoń po pogotowie ratunkowe.";
+
   UserModel _userModel;
   HealthStatus _healthStatus = HealthStatus.healthy;
+  bool _presumablySick = false;
 
   @override
   void initState() {
@@ -34,6 +41,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
         setState(() {
           _userModel = userModel;
           _healthStatus = healthStatus;
+          _presumablySick = userModel.presumablySick ?? false;
         });
       } else {
         Navigator.push(context, HealthStatusSurveyPage.pageRoute()).then((_) {
@@ -50,7 +58,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
         ProfileAppBar(
           title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
           backgroundGradient: LinearGradient(
-            colors: _healthStatus.getColors(),
+            colors: _presumablySick ? [AppColors.redBase, AppColors.redBase] : _healthStatus.getColors(),
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
           ),
@@ -61,12 +69,28 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const SizedBox(height: 32),
-                _buildHealthStatusContainer(context),
                 const SizedBox(height: 20),
-                _builQuizCard(context),
+                Text(
+                  "Twoj stan zdrowia",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _buildHealthStatusContainer(context),
+                if (!_presumablySick) ...[
+                  _builQuizCard(context),
+                  const SizedBox(height: 20),
+                ],
                 const SizedBox(height: 20),
                 _buildDiagnosisContainer(),
+                if (_presumablySick) ...[
+                  const SizedBox(height: 20),
+                  _builQuizCard(context),
+                  const SizedBox(height: 20),
+                ],
               ],
             ),
           ),
@@ -100,14 +124,22 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
               ),
             ),
             const SizedBox(width: 20),
-            Text(
-              _healthStatus.getDescription(),
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
+            Expanded(
+              child: Text(
+                _healthStatus.getDescription(),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            )
+            ),
+            const SizedBox(width: 12),
+            Icon(
+              Icons.keyboard_arrow_down,
+              color: AppColors.darkGrey,
+            ),
+            const SizedBox(width: 22),
           ],
         ),
       ),
@@ -126,11 +158,9 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 16),
         Text(
-          "Możliwe, że masz koronawirusa."
-          "\nNie idź lekarza, ani do szpitala!"
-          "\nJeśli poczujesz się gorzej, zadzwoń po pomoc medyczną.",
+          _presumablySick ? kNegativeDiagnosisText : kPositiveDiagnosisText,
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
@@ -146,49 +176,32 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
         _buildContactCard(),
         const SizedBox(height: 20),
         Center(
           child: PrimaryButton(
-            width: 280,
-            backgroundColor: Color(0XFFFF4E00),
+            width: 290,
+            height: 47,
+            title: "Infolinia: 800 190 590",
+            onClick: () {
+              launch('tel:800190590');
+            },
+          ),
+        ),
+        const SizedBox(height: 20),
+        Center(
+          child: PrimaryButton(
+            width: 290,
+            backgroundColor: AppColors.redBase,
             height: 47,
             title: "Pilna pomoc medyczna: 112",
-            onClick: () {},
+            onClick: () {
+              launch('tel:112');
+            },
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildContactCard() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Powiatowa Stacja Sanitarno-Epidemiologiczna",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.lightGrey,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: PrimaryButton(
-                width: 280,
-                height: 47,
-                title: "Zadzwoń: 89 767 23 22",
-                onClick: () {},
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 
@@ -242,6 +255,43 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContactCard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        border: Border.all(color: Color(0XFFEBEBEB)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Powiatowa Stacja Sanitarno-Epidemiologiczna",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Center(
+              child: PrimaryButton(
+                width: 290,
+                height: 47,
+                title: "Zadzwoń: 89 767 23 22",
+                onClick: () {
+                  launch('tel:897672322');
+                },
+              ),
+            )
+          ],
         ),
       ),
     );

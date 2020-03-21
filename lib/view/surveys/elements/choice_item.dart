@@ -105,7 +105,7 @@ class ChoiceItem extends StatelessWidget {
                 questionChoiceOption.title,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: questionChoiceOption.textColor ?? Colors.black,
                   fontWeight: FontWeight.w400,
                 ),
               ),

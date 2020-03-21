@@ -7,8 +7,15 @@ class UserModel extends Equatable {
   final String age;
   final int healthStatusId;
   final List<int> assistanceStatusIds;
+  final bool presumablySick;
 
-  UserModel({this.name, this.age, this.healthStatusId, this.assistanceStatusIds});
+  UserModel({
+    this.name,
+    this.age,
+    this.healthStatusId,
+    this.assistanceStatusIds,
+    this.presumablySick,
+  });
 
   Map<dynamic, dynamic> toMap() {
     return {
@@ -16,6 +23,7 @@ class UserModel extends Equatable {
       'age': this.age,
       'healthStatusId': this.healthStatusId,
       'assistanceStatusIds': this.assistanceStatusIds,
+      'presumablySick': this.presumablySick,
     };
   }
 
@@ -29,6 +37,7 @@ class UserModel extends Equatable {
       age: map['age'],
       healthStatusId: map['healthStatusId'],
       assistanceStatusIds: map['assistanceStatusIds'] != null ? (map['assistanceStatusIds'] as List).cast<int>() : [],
+      presumablySick: map['presumablySick'],
     );
   }
 
@@ -37,17 +46,19 @@ class UserModel extends Equatable {
     String age,
     int healthStatusId,
     List<int> assistanceStatusIds,
+    bool presumablySick,
   }) {
     return new UserModel(
       name: name ?? this.name,
       age: age ?? this.age,
       healthStatusId: healthStatusId ?? this.healthStatusId,
       assistanceStatusIds: assistanceStatusIds ?? this.assistanceStatusIds,
+      presumablySick: presumablySick ?? this.presumablySick,
     );
   }
 
   @override
-  List<Object> get props => [name, age, healthStatusId, assistanceStatusIds];
+  List<Object> get props => [name, age, healthStatusId, assistanceStatusIds, presumablySick];
 
   HealthStatus getHealthStatusOrNull() {
     if (healthStatusId != null) {

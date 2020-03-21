@@ -1,10 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:osk_flutter/model/interview_question_model.dart';
 import 'package:osk_flutter/model/quiz_question_model.dart';
 import 'package:osk_flutter/model/statistic_model.dart';
 
 class FirebaseRepository {
   final DatabaseReference statisticNode = FirebaseDatabase.instance.reference().child("statistics");
   final DatabaseReference quizNode = FirebaseDatabase.instance.reference().child("quiz");
+  final DatabaseReference interviewNode = FirebaseDatabase.instance.reference().child("interview");
 
   StatisticModel _statisticModelForPoland;
   StatisticModel _statisticModelForDistrict;
@@ -26,5 +28,11 @@ class FirebaseRepository {
   Future<List<QuizQuestionModel>> getQuizQuestions() async {
     final questions = (await quizNode.child("questions").once()).value;
     return (questions as List).map((it) => QuizQuestionModel.fromMap(it)).toList();
+  }
+
+  /// Interview
+  Future<List<InterviewQuestionModel>> getInterviewQuestions() async {
+    final questions = (await interviewNode.child("questions").once()).value;
+    return (questions as List).map((it) => InterviewQuestionModel.fromMap(it)).toList();
   }
 }

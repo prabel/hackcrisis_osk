@@ -1,88 +1,89 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:osk_flutter/values/app_colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osk_flutter/data/firebase_repository.dart';
+import 'package:osk_flutter/data/user_repository.dart';
+import 'package:osk_flutter/domain/interview/get_interview_questions_use_case.dart';
+import 'package:osk_flutter/domain/user/get_user_use_case.dart';
+import 'package:osk_flutter/domain/user/update_user_use_case.dart';
 import 'package:osk_flutter/values/app_images.dart';
-import 'package:osk_flutter/view/interview/interview_form.dart';
+import 'package:osk_flutter/view/common/no_connection_error_view.dart';
+import 'package:osk_flutter/view/common/styled_circular_progress_indicator.dart';
+import 'package:osk_flutter/view/interview/bloc.dart';
+import 'package:osk_flutter/view/interview/interview_negative_results_page.dart';
+import 'package:osk_flutter/view/interview/interview_positivie_results_page.dart';
+import 'package:osk_flutter/view/interview/interview_question_body.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 
 class InterviewPage extends StatelessWidget {
-  static MaterialPageRoute pageRoute(InterviewForm interviewForm) =>
-      MaterialPageRoute(builder: (BuildContext context) => InterviewPage(interviewForm: interviewForm));
-
-  final InterviewForm interviewForm;
-
-  const InterviewPage({Key key, this.interviewForm = InterviewForm.example}) : super(key: key);
+  static MaterialPageRoute pageRoute() => MaterialPageRoute(builder: (BuildContext context) => InterviewPage());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0XFFED0428),
-      appBar: const IntroAppBar(
-        appBarTheme: IntroAppBarTheme.light,
-      ),
-      body: Stack(
-        children: <Widget>[
-          Image.asset(AppImages.backgroundPng),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Spacer(),
-                const SizedBox(height: 42),
-                Text(
-                  "Podstawowy wywiad\nmedyczny",
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                if (interviewForm.question != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    interviewForm.question,
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-                const SizedBox(height: 36),
-                Column(
-                  children: interviewForm.answers.map((item) => _buildAnswerButton(item)).toList(),
-                ),
-                const SizedBox(height: 70),
-              ],
-            ),
-          )
-        ],
-      ),
+    return BlocProvider<InterviewBloc>(
+      create: (context) => InterviewBloc(
+        GetInerviewQuestionsUseCase(context.repository<FirebaseRepository>()),
+        GetUserUseCase(context.repository<UserRepository>()),
+        UpdateUserUseCase(context.repository<UserRepository>()),
+      )..add(LoadData()),
+      child: _buildScreen(context),
     );
   }
 
-  Widget _buildAnswerButton(InterviewAnswer answer) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Container(
-        width: double.infinity,
-        height: 60,
-        child: RaisedButton(
-            elevation: 4,
-            color: answer.isPrimaryAnswer ? AppColors.primaryBlue : Colors.white,
-            padding: EdgeInsets.all(14),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              answer.title,
-              style: TextStyle(
-                fontSize: 18,
-                color: answer.isPrimaryAnswer ? Colors.white : AppColors.darkGrey,
-                fontWeight: FontWeight.w600,
-              ),
+  Widget _buildScreen(BuildContext context) {
+    return WillPopScope(
+      child: Scaffold(
+        appBar: const IntroAppBar(
+          backgroundColor: Color(0XFF2618E8),
+          appBarTheme: IntroAppBarTheme.light,
+        ),
+        backgroundColor: Color(0XFF2618E8),
+        body: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Image.asset(AppImages.backgroundPng),
             ),
-            onPressed: () {}),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: _buildBody(context),
+            )
+          ],
+        ),
       ),
+      onWillPop: () async => false,
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return BlocConsumer<InterviewBloc, InterviewState>(
+      listener: (BuildContext context, InterviewState state) {
+        if (state is ShowPositiveResultsState) {
+          Navigator.pushReplacement(context, InterviewPositiveResultsPage.pageRoute());
+        }
+
+        if (state is ShowNegativeResultsState) {
+          Navigator.pushReplacement(context, InterviewNegativeResultsPage.pageRoute());
+        }
+      },
+      buildWhen: (_, newState) => !(newState is ShowPositiveResultsState) && !(newState is ShowNegativeResultsState),
+      builder: (BuildContext context, InterviewState state) {
+        if (state is ShowQuestionState) {
+          return InterviewQuestionBody(state);
+        }
+
+        if (state is ErrorState) {
+          return NoConnectionErrorView(
+            exception: state.exception,
+            onRetryClick: () => BlocProvider.of<InterviewBloc>(context).add(LoadData()),
+          );
+        }
+
+        return Padding(
+          padding: const EdgeInsets.all(12),
+          child: Center(child: StyledCircularProgressIndicator()),
+        );
+      },
     );
   }
 }

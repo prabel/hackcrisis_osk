@@ -1,37 +1,85 @@
 {
-  "quiz": {
-    "questions" : [
+  "interview": {
+    "videoUrl": "https://www.youtube.com/watch?v=EjtilXqDD0s",
+    "questions": [
       {
-        "question" : "Czy na wózku sklepowym może utrzymywać koronawirus?",
-        "answers" : [
+        "question": "Czy miałeś kontakt z osobą zarażoną przez ponad 15 minut w odległości poniżej 2 metrów?",
+        "answers": [
+          "Tak",
+          "Nie",
+          "Nie wiem"
+        ]
+      },
+      {
+        "question": "Czy w ciągu ostatnich 14 dni przebywałeś poza granicami Polski?",
+        "answers": [
+          "Tak",
+          "Nie"
+        ]
+      },
+      {
+        "question": "Czy masz gorączkę powyżej 38 stopni?",
+        "answers": [
+          "Tak",
+          "Nie"
+        ]
+      },
+      {
+        "question": "Czy wraz z gorączką masz suchy kaszel?",
+        "answers": [
+          "Tak",
+          "Nie"
+        ]
+      },
+      {
+        "question": "Czy boli Cię gardło?",
+        "answers": [
+          "Tak",
+          "Nie"
+        ]
+      },
+      {
+        "question": "Czy masz problem z oddychaniem i dusznośći?",
+        "answers": [
+          "Tak",
+          "Nie"
+        ]
+      }
+    ]
+  },
+  "quiz": {
+    "questions": [
+      {
+        "question": "Czy na wózku sklepowym może utrzymywać koronawirus?",
+        "answers": [
           {
-            "text" : "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta.",
-            "valid" : false
+            "text": "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta.",
+            "valid": false
           },
           {
-            "text" : "Nie, wirus nie może się utrzymać.",
-            "valid" : true
+            "text": "Nie, wirus nie może się utrzymać.",
+            "valid": true
           },
           {
-            "text" : "Nauka nie zna odpowiedzi na to pytanie.",
-            "valid" : false
+            "text": "Nauka nie zna odpowiedzi na to pytanie.",
+            "valid": false
           }
         ]
       },
       {
-        "question" : "Czy na wózku sklepowym może utrzymywać koronawirus? v2",
-        "answers" : [
+        "question": "Czy na wózku sklepowym może utrzymywać koronawirus? v2",
+        "answers": [
           {
-            "text" : "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta. v2",
-            "valid" : false
+            "text": "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta. v2",
+            "valid": false
           },
           {
-            "text" : "Nie, wirus nie może się utrzymać. v2",
-            "valid" : true
+            "text": "Nie, wirus nie może się utrzymać. v2",
+            "valid": true
           },
           {
-            "text" : "Nauka nie zna odpowiedzi na to pytanie. v2",
-            "valid" : false
+            "text": "Nauka nie zna odpowiedzi na to pytanie. v2",
+            "valid": false
           }
         ]
       }
