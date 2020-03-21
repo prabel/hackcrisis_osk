@@ -53,82 +53,77 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
       autovalidate: _shouldAutoValidate,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              Text(
+                "Poznajmy się",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                "Ile masz lat?",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _ageTextController,
+                autofocus: true,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  filled: true,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                ),
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return "Podaj swój wiek";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 20),
+              Row(
                 children: <Widget>[
-                  const SizedBox(height: 20),
-                  Text(
-                    "Poznajmy się",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    "Ile masz lat?",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _ageTextController,
-                    autofocus: true,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
-                    ),
-                    validator: (text) {
-                      if (text.isEmpty) {
-                        return "Podaj swój wiek";
-                      }
-                      return null;
+                  BackButton(
+                    color: AppColors.primaryBlue,
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
+                  ),
+                  Spacer(),
+                  SizedBox(
+                    width: 215,
+                    child: PrimaryButton(
+                      title: "Dalej",
+                      onClick: () {
+                        if (_formKey.currentState.validate()) {
+                          _proceedToNextScreen(context);
+                        } else {
+                          setState(() {
+                            _shouldAutoValidate = true;
+                          });
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: <Widget>[
-                BackButton(
-                  color: AppColors.primaryBlue,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Spacer(),
-                SizedBox(
-                  width: 215,
-                  child: PrimaryButton(
-                    title: "Dalej",
-                    onClick: () {
-                      if (_formKey.currentState.validate()) {
-                        _proceedToNextScreen(context);
-                      } else {
-                        setState(() {
-                          _shouldAutoValidate = true;
-                        });
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-          ],
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );

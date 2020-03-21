@@ -7,6 +7,7 @@ import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 import 'package:osk_flutter/view/main/main_navigation_page.dart';
+import 'package:osk_flutter/view/video/video_page.dart';
 
 class InterviewQuarantineQuestionPage extends StatelessWidget {
   static MaterialPageRoute pageRoute() =>
@@ -71,6 +72,13 @@ class InterviewQuarantineQuestionPage extends StatelessWidget {
       ),
     );
 
-    Navigator.pushAndRemoveUntil(context, MainNavigationPage.pageRoute(), (_) => false);
+    Navigator.pushAndRemoveUntil(
+        context,
+        VideoPage.pageRoute(
+            nextPageRoute: MainNavigationPage.pageRoute(),
+            youtubeUrl: withQuarantine
+                ? "https://www.youtube.com/watch?v=_0D3Q5Fawko"
+                : "https://www.youtube.com/watch?v=WbeLp_lgrqM"),
+        (_) => false);
   }
 }

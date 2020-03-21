@@ -55,7 +55,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
           _presumablySick = userModel.presumablySick ?? false;
           _quarantineStartDate = userModel.quarantineStartDate;
         });
-        if (userModel.presumablySick && userModel?.quarantineStartDate == null) {
+        if (userModel?.presumablySick != null && userModel.presumablySick && userModel?.quarantineStartDate == null) {
           _timer?.cancel();
           _timer = Timer(Duration(seconds: 5), () {
             Navigator.push(context, InterviewCallQuestionPage.pageRoute());
@@ -111,7 +111,10 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
   }
 
   ProfileAppBar _buildAppBar() {
-    if (_quarantineStartDate != null) {
+    if (_presumablySick &&
+        _quarantineStartDate != null &&
+        _healthStatus != HealthStatus.healthy &&
+        _healthStatus != HealthStatus.recovered) {
       return ProfileAppBar(
         title: "Kwarantanna\n${(_quarantineStartDate.add(Duration(days: 15)).difference(DateTime.now()).inDays)} DNI",
         backgroundGradient: LinearGradient(

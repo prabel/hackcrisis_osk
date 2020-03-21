@@ -12,6 +12,7 @@ import 'package:osk_flutter/view/quiz/bloc.dart';
 import 'package:osk_flutter/view/quiz/quiz_answer_body.dart';
 import 'package:osk_flutter/view/quiz/quiz_question_body.dart';
 import 'package:osk_flutter/view/quiz/quiz_results_page.dart';
+import 'package:osk_flutter/view/video/video_page.dart';
 
 class QuizPage extends StatelessWidget {
   static MaterialPageRoute pageRoute({List<QuizQuestionModel> questions = const []}) =>
@@ -57,6 +58,9 @@ class QuizPage extends StatelessWidget {
       listener: (BuildContext context, QuizState state) {
         if (state is ShowResultsState) {
           Navigator.pushReplacement(context, QuizResultsPage.pageRoute(state.answerMap));
+        }
+        if (state is ShowQuestionState) {
+          Navigator.push(context, VideoPage.pageRoute(youtubeUrl: state.quizQuestionModel.videoUrl));
         }
       },
       buildWhen: (_, newState) => !(newState is ShowResultsState),

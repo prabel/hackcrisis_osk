@@ -30,46 +30,48 @@ class QuizResultsPage extends StatelessWidget {
           SvgPicture.asset(AppImages.background),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                const SizedBox(height: 20),
-                Expanded(child: _buildQuizResultsBody(context)),
-                if (!fullCorrect) ...[
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
                   const SizedBox(height: 20),
-                  PrimaryButton(
-                    title: "Odpowiedz jeszcze raz",
-                    onClick: () =>
-                        Navigator.pushReplacement(context, QuizPage.pageRoute(questions: _getOnlyFailedQuestions())),
-                  )
-                ],
-                const SizedBox(height: 20),
-                fullCorrect
-                    ? PrimaryButton(
-                        title: "Podziel się",
-                        onClick: () => Navigator.pop(context),
-                      )
-                    : OptionalButton(
-                        title: "Podziel się",
-                        onClick: () => Navigator.pop(context),
+                  _buildQuizResultsBody(context),
+                  if (!fullCorrect) ...[
+                    const SizedBox(height: 20),
+                    PrimaryButton(
+                      title: "Odpowiedz jeszcze raz",
+                      onClick: () =>
+                          Navigator.pushReplacement(context, QuizPage.pageRoute(questions: _getOnlyFailedQuestions())),
+                    )
+                  ],
+                  const SizedBox(height: 10),
+                  fullCorrect
+                      ? PrimaryButton(
+                          title: "Podziel się",
+                          onClick: () => Navigator.pop(context),
+                        )
+                      : OptionalButton(
+                          title: "Podziel się",
+                          onClick: () => Navigator.pop(context),
+                        ),
+                  const SizedBox(height: 10),
+                  FlatButton(
+                    child: Text(
+                      "Zamknij",
+                      style: TextStyle(
+                        fontSize: 18,
+                        decoration: TextDecoration.underline,
+                        color: AppColors.primaryBlue,
+                        fontWeight: FontWeight.bold,
                       ),
-                const SizedBox(height: 20),
-                FlatButton(
-                  child: Text(
-                    "Zamknij",
-                    style: TextStyle(
-                      fontSize: 18,
-                      decoration: TextDecoration.underline,
-                      color: AppColors.primaryBlue,
-                      fontWeight: FontWeight.bold,
                     ),
+                    onPressed: () => Navigator.pop(context),
                   ),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                const SizedBox(height: 60),
-              ],
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ],
@@ -83,7 +85,6 @@ class QuizResultsPage extends StatelessWidget {
     final int wrongAnswerCount = allAnswers.where((it) => !it).toList().length;
 
     return Column(
-      mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Center(
@@ -136,7 +137,8 @@ class QuizResultsPage extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
           textAlign: TextAlign.center,
-        )
+        ),
+        const SizedBox(height: 28),
       ],
     );
   }

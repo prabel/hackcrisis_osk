@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osk_flutter/data/firebase_repository.dart';
 import 'package:osk_flutter/data/user_repository.dart';
 import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_images.dart';
@@ -10,6 +11,7 @@ import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 import 'package:osk_flutter/view/intro/intro_summary_page.dart';
 import 'package:osk_flutter/view/surveys/elements/one_choice_qustion_widget.dart';
 import 'package:osk_flutter/view/surveys/elements/question_choice_item.dart';
+import 'package:osk_flutter/view/video/video_page.dart';
 
 class HealthStatusSurveyPage extends StatefulWidget {
   static List<QuestionChoiceOption<HealthStatus>> healthStatusOptions = [
@@ -94,7 +96,14 @@ class _HealthStatusSurveyPageState extends State<HealthStatusSurveyPage> {
         Navigator.pushReplacement(context, IntroSummaryPage.pageRoute(selectedChoice));
       } else {
         await userRepository.createOrUpdateUser(currentUserModel.copyWith(healthStatusId: selectedChoice.option.index));
-        Navigator.pushReplacement(context, InterviewPage.pageRoute());
+
+        try {
+          final videoUrl = await RepositoryProvider.of<FirebaseRepository>(context).getInterviewVideoUrl();
+          Navigator.pushReplacement(
+              context, VideoPage.pageRoute(youtubeUrl: videoUrl, nextPageRoute: InterviewPage.pageRoute()));
+        } catch (e) {
+          print("Error occurs when loading video url $e");
+        }
       }
     }
   }

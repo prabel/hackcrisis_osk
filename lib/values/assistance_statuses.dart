@@ -7,6 +7,7 @@ enum AssistanceStatus {
   takeCareOfChild,
   myCompanyIssues,
   contractWork,
+  animalIssue,
 }
 
 extension AssistanceStatusExtensions on AssistanceStatus {
@@ -37,6 +38,11 @@ extension AssistanceStatusExtensions on AssistanceStatus {
           const Color(0XffDBA513),
           const Color(0XFFDBA513),
         ]);
+      case AssistanceStatus.contractWork:
+        return QuestionChoiceOption(this, "Nie mam możliwości zadbania o zwierze domowe.", [
+          const Color(0XffDBA513),
+          const Color(0XFFDBA513),
+        ]);
       default:
         throw Exception("Invalid type");
     }
@@ -45,21 +51,4 @@ extension AssistanceStatusExtensions on AssistanceStatus {
   List<Color> getColors() => getQuestionChoiceOption().indicatorColors;
 
   String getDescription() => getQuestionChoiceOption().title;
-
-  String getAdditionalInformation() {
-    switch (this) {
-      case AssistanceStatus.notNeeded:
-        return "Pomoc dla osób pracujących na umowach o dzieło i zlecenie.";
-      case AssistanceStatus.needAssistanceWithShopping:
-        return "Pomoc dla osób pracujących na umowach o dzieło i zlecenie.";
-      case AssistanceStatus.takeCareOfChild:
-        return "Pomoc dla osób pracujących na umowach o dzieło i zlecenie.";
-      case AssistanceStatus.myCompanyIssues:
-        return "Pomoc dla osób pracujących na umowach o dzieło i zlecenie.";
-      case AssistanceStatus.contractWork:
-        return "Pomoc dla osób pracujących na umowach o dzieło i zlecenie.";
-      default:
-        throw Exception("Invalid type");
-    }
-  }
 }

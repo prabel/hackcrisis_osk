@@ -40,16 +40,6 @@ class _SplashPageState extends State<SplashPage> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "Dzień dobry,\nto Twój Osobisty\nSystem Komunikacji",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 60),
               StyledCircularProgressIndicator(),
             ],
           )),

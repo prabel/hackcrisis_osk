@@ -50,7 +50,7 @@ class InterviewPositiveResultsPage extends StatelessWidget {
                   title: "Rozumiem",
                   onClick: () => Navigator.pushAndRemoveUntil(context, MainNavigationPage.pageRoute(), (_) => false),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 20),
               ],
             ),
           ),

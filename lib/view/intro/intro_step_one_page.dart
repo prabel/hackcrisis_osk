@@ -45,86 +45,82 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
       autovalidate: _shouldAutoValidate,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 20),
+              Text(
+                "Poznajmy się",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                "Jak masz na imię?",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _nameTextController,
+                autofocus: true,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(
+                  filled: true,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                  labelText: "Imię",
+                  hintText: "Wpisz swoje imię",
+                ),
+                validator: (text) {
+                  if (text.isEmpty) {
+                    return "Podaj swoje imię aby kontynuować";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              Row(
                 children: <Widget>[
-                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 215,
+                    child: PrimaryButton(
+                      title: "Dalej",
+                      onClick: () => _proceedToNextScreen(context),
+                    ),
+                  ),
+                  const Spacer(),
                   Text(
-                    "Poznajmy się",
+                    "1 ",
                     style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
+                      fontSize: 18,
+                      color: AppColors.primaryBlue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 12),
                   Text(
-                    "Jak masz na imię?",
+                    "z 2",
                     style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
+                      fontSize: 18,
+                      color: AppColors.lightGrey,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _nameTextController,
-                    autofocus: true,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
-                      filled: true,
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
-                      labelText: "Imię",
-                      hintText: "Wpisz swoje imię",
-                    ),
-                    validator: (text) {
-                      if (text.isEmpty) {
-                        return "Podaj swoje imię aby kontynuować";
-                      }
-                      return null;
-                    },
-                  ),
+                  const Spacer(),
                 ],
               ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 215,
-                  child: PrimaryButton(
-                    title: "Dalej",
-                    onClick: () => _proceedToNextScreen(context),
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  "1 ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primaryBlue,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "z 2",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.lightGrey,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-            const SizedBox(height: 16),
-          ],
+              const SizedBox(height: 16),
+            ],
+          ),
         ),
       ),
     );

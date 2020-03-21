@@ -5,7 +5,7 @@ import 'package:osk_flutter/data/user_repository.dart';
 import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/assistance_statuses.dart';
-import 'package:osk_flutter/view/main/information/assistance_informations_holder.dart';
+import 'package:osk_flutter/view/main/information/assistance_information_widget.dart';
 import 'package:osk_flutter/view/main/information/assistance_status_holder.dart';
 import 'package:osk_flutter/view/main/information/statistic/statistic_widget.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
@@ -58,17 +58,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
                 ],
                 if (_currentAssistanceStatus.isNotEmpty) ...[
                   _buildAssistanceStatusesContainer(),
-                  const SizedBox(height: 34),
-                  Text(
-                    "Wiedza dla Ciebie",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  _buildInformationsBaseOnStatuses(),
+                  AssistanceInformationWidget(),
                 ],
                 const SizedBox(height: 24),
                 StatisticWidget(RepositoryProvider.of<FirebaseRepository>(context))
@@ -104,18 +94,6 @@ class _InformationDashboardState extends State<InformationDashboard> {
           onPressed: () => _openAssistanceSurvey(),
         )
       ],
-    );
-  }
-
-  Widget _buildInformationsBaseOnStatuses() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: _currentAssistanceStatus
-          .map((it) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: AssistanceInformationHolder(it),
-              ))
-          .toList(),
     );
   }
 

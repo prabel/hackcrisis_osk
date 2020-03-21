@@ -1,101 +1,234 @@
 {
+  "assistance": {
+    "1": {
+      "description": "Problem z zakupami",
+      "url": "https://www.facebook.com/groups/widzialnareka/"
+    },
+    "2": {
+      "description": "Opieka nad dzieckiem",
+      "url": "https://www.gov.pl/web/koronawirus/informacje-dla-rodzicow"
+    },
+    "3": {
+      "description": "Kryzys w firmie",
+      "url": "https://www.gov.pl/web/koronawirus/informacje-dla-przedsiebiorcow"
+    },
+    "4": {
+      "description": "Umowa cywilnoprawna",
+      "url": "https://www.pit.pl/aktualnosci/2-tys-zl-brutto-dla-samozatrudnionych-i-na-umowach-zlecenie-lub-o-dzielo-980265"
+    },
+    "5": {
+      "description": "Problem ze zwierzęciem",
+      "url": "https://www.facebook.com/groups/widzialnareka/"
+    }
+  },
   "interview": {
-    "videoUrl": "https://www.youtube.com/watch?v=EjtilXqDD0s",
     "questions": [
       {
-        "question": "Czy miałeś kontakt z osobą zarażoną przez ponad 15 minut w odległości poniżej 2 metrów?",
         "answers": [
           "Tak",
           "Nie",
           "Nie wiem"
-        ]
+        ],
+        "question": "Czy miałeś kontakt z osobą zarażoną przez ponad 15 minut w odległości poniżej 2 metrów?"
       },
       {
-        "question": "Czy w ciągu ostatnich 14 dni przebywałeś poza granicami Polski?",
         "answers": [
           "Tak",
           "Nie"
-        ]
+        ],
+        "question": "Czy w ciągu ostatnich 14 dni przebywałeś poza granicami Polski?"
       },
       {
-        "question": "Czy masz gorączkę powyżej 38 stopni?",
         "answers": [
           "Tak",
           "Nie"
-        ]
+        ],
+        "question": "Czy masz gorączkę powyżej 38 stopni?"
       },
       {
-        "question": "Czy wraz z gorączką masz suchy kaszel?",
         "answers": [
           "Tak",
           "Nie"
-        ]
+        ],
+        "question": "Czy wraz z gorączką masz suchy kaszel?"
       },
       {
-        "question": "Czy boli Cię gardło?",
         "answers": [
           "Tak",
           "Nie"
-        ]
+        ],
+        "question": "Czy boli Cię gardło?"
       },
       {
-        "question": "Czy masz problem z oddychaniem i dusznośći?",
         "answers": [
           "Tak",
           "Nie"
-        ]
+        ],
+        "question": "Czy masz problem z oddychaniem i dusznośći?"
       }
-    ]
+    ],
+    "videoUrl": "https://www.youtube.com/watch?v=EjtilXqDD0s"
   },
   "quiz": {
     "questions": [
       {
-        "question": "Czy na wózku sklepowym może utrzymywać koronawirus?",
         "answers": [
           {
-            "text": "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta.",
+            "text": "Tak, ale pod pewnymi warunkami.",
             "valid": false
           },
           {
-            "text": "Nie, wirus nie może się utrzymać.",
+            "text": "Nie, nie stanowi. Warunkiem jest aby obie strony dbały o higienę.",
             "valid": true
           },
           {
-            "text": "Nauka nie zna odpowiedzi na to pytanie.",
+            "text": "Nie, jeśli tylko ja mam czystą.",
             "valid": false
           }
-        ]
+        ],
+        "question": "Czy podanie dłoni stanowi zagrożenie?",
+        "videoUrl": "https://youtu.be/Q9UMZag3WKw"
       },
       {
-        "question": "Czy na wózku sklepowym może utrzymywać koronawirus? v2",
         "answers": [
           {
-            "text": "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta. v2",
-            "valid": false
-          },
-          {
-            "text": "Nie, wirus nie może się utrzymać. v2",
+            "text": "Tak, powinnismy brać kąpiel przynamniej raz dziennie oraz szczególnie zwracać uwagę na higienę swojej twarzy.",
             "valid": true
           },
           {
-            "text": "Nauka nie zna odpowiedzi na to pytanie. v2",
+            "text": "Nie, nie powinniśmy.",
+            "valid": true
+          },
+          {
+            "text": "Zależy od pory dnia.",
             "valid": false
           }
-        ]
+        ],
+        "question": "Czy powinniśmy zwracać uwagę na higienę innych części ciała?",
+        "videoUrl": "https://youtu.be/PUMebYraC20"
+      },
+      {
+        "answers": [
+          {
+            "text": "Bardzo duże, w momencie gdy nie zmienimy odzieży po przyjściu z otoczenia zewnetrznego, możemy podejrzewać zakażenie.",
+            "valid": false
+          },
+          {
+            "text": "Praktycznie żadne, jeśli jedna odzież jest zmieniana co trzy dni.",
+            "valid": false
+          },
+          {
+            "text": "Praktycznie żadne, ponieważ należy pamiętać, że wirus przenosi się drogą kropelkową. Natomiast przy ewentualnej zmianie ubrania należy pamiętać o higienie rąk i twarzy.",
+            "valid": true
+          }
+        ],
+        "question": "Jakie zagrożenie niesie ze sobą odzież w której chodzimy na zewnątrz?",
+        "videoUrl": "https://youtu.be/z3L6xu44TVs"
+      },
+      {
+        "answers": [
+          {
+            "text": "Tak, w małym gronie osób.",
+            "valid": true
+          },
+          {
+            "text": "Nie, nie jest to wskazane jeśli wysiłek jest dużo większy niż zazwyczaj - w skutek tego nadwyrężamy swoją odporność.",
+            "valid": true
+          },
+          {
+            "text": " Tak, zaleca się trenowanie w dużym gronie osób.",
+            "valid": false
+          }
+        ],
+        "question": "Czy możemy uprawniać aktywność na świeżym powietrzu?",
+        "videoUrl": "https://youtu.be/FPr_fOShJlA"
+      },
+      {
+        "answers": [
+          {
+            "text": "Narodowy Fundusz Zdrowia",
+            "valid": true
+          },
+          {
+            "text": "Ośrodek pomocy społecznej w twoim mieście",
+            "valid": true
+          },
+          {
+            "text": "Szpital zakaźny",
+            "valid": false
+          }
+        ],
+        "question": "Do kogo zwracamy się po pomoc jeśli mamy trudności podczas odbywania kwarantanny i nie ma kto nam pomóc?",
+        "videoUrl": "https://youtu.be/_0D3Q5Fawko"
       }
     ]
   },
   "statistics": {
     "districts": {
+      "dolnośląskie": {
+        "cured": 0,
+        "deaths": 2,
+        "infected": 61
+      },
+      "kujawsko-pomorskie": {
+        "cured": 9,
+        "deaths": 0,
+        "infected": 15
+      },
+      "lubelskie": {
+        "cured": 0,
+        "deaths": 1,
+        "infected": 34
+      },
+      "lubuskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 5
+      },
       "mazowieckie": {
         "cured": 0,
         "deaths": 0,
         "infected": 112
       },
-      "dolnośląskie": {
+      "małopolskie": {
         "cured": 0,
-        "deaths": 2,
-        "infected": 61
+        "deaths": 0,
+        "infected": 12
+      },
+      "opolskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 11
+      },
+      "podkarpackie": {
+        "cured": 0,
+        "deaths": 1,
+        "infected": 19
+      },
+      "podlaskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 4
+      },
+      "pomorskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 11
+      },
+      "warmińsko-mazurskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 17
+      },
+      "wielkopolskie": {
+        "cured": 0,
+        "deaths": 1,
+        "infected": 22
+      },
+      "zachodniopomorskie": {
+        "cured": 0,
+        "deaths": 0,
+        "infected": 10
       },
       "łódzkie": {
         "cured": 0,
@@ -107,71 +240,31 @@
         "deaths": 0,
         "infected": 49
       },
-      "lubelskie": {
-        "cured": 0,
-        "deaths": 1,
-        "infected": 34
-      },
-      "podkarpackie": {
-        "cured": 0,
-        "deaths": 1,
-        "infected": 19
-      },
-      "wielkopolskie": {
-        "cured": 0,
-        "deaths": 1,
-        "infected": 22
-      },
-      "warmińsko-mazurskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 17
-      },
-      "małopolskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 12
-      },
-      "kujawsko-pomorskie": {
-        "cured": 9,
-        "deaths": 0,
-        "infected": 15
-      },
-      "opolskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 11
-      },
-      "pomorskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 11
-      },
-      "lubuskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 5
-      },
-      "zachodniopomorskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 10
-      },
       "świętokrzyskie": {
         "cured": 0,
         "deaths": 0,
         "infected": 7
-      },
-      "podlaskie": {
-        "cured": 0,
-        "deaths": 0,
-        "infected": 4
       }
     },
     "poland": {
       "cured": 1,
       "deaths": 5,
       "infected": 439
+    }
+  },
+  "users": {
+    "6012c493f59d10a6": {
+      "age": "-65",
+      "assistanceStatusIds": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "healthStatusId": 1,
+      "name": "Grażyna",
+      "presumablySick": false,
+      "quarantineStartDate": 1584824863482
     }
   }
 }
