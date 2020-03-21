@@ -8,7 +8,8 @@ class UserRepository {
   Future createOrUpdateUser(UserModel userModel) async {
     DatabaseReference databaseReference = usersNode.child(await _getUserId());
 
-    await databaseReference.set(userModel.toMap());
+    var map = userModel.toMap();
+    await databaseReference.set(map);
   }
 
   Future<UserModel> getCurrentUserModel() async {

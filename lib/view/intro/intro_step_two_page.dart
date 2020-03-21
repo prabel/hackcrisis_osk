@@ -60,7 +60,7 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const SizedBox(height: 42),
+                  const SizedBox(height: 20),
                   Text(
                     "Poznajmy się",
                     style: TextStyle(
@@ -78,7 +78,7 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: _ageTextController,
                     autofocus: true,
@@ -100,11 +100,14 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
                 ],
               ),
             ),
-            const SizedBox(height: 36),
+            const SizedBox(height: 20),
             Row(
               children: <Widget>[
                 BackButton(
                   color: AppColors.primaryBlue,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 Spacer(),
                 SizedBox(
@@ -134,6 +137,6 @@ class _IntroStepTwoBodyState extends State<_IntroStepTwoBody> {
   Future _proceedToNextScreen(BuildContext context) async {
     await RepositoryProvider.of<UserRepository>(context)
         .createOrUpdateUser(widget.userModel.copyWith(age: _ageTextController.text));
-    Navigator.pushReplacement(context, HealthStatusSurveyPage.pageRoute());
+    Navigator.pushAndRemoveUntil(context, HealthStatusSurveyPage.pageRoute(), (_) => false);
   }
 }

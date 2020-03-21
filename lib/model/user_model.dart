@@ -35,6 +35,8 @@ class UserModel extends Equatable {
   }
 
   factory UserModel.fromMap(Map<dynamic, dynamic> map) {
+    if (map == null) return UserModel.empty();
+
     return UserModel(
         name: map['name'],
         age: map['age'],

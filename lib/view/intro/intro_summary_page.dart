@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
@@ -77,26 +76,6 @@ class IntroSummaryPage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _getCheckmarkItem(String text) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.check,
-          color: AppColors.primaryBlue,
-        ),
-        const SizedBox(width: 24),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 17,
-            color: AppColors.darkGrey,
-            fontWeight: FontWeight.bold,
           ),
         ),
       ],

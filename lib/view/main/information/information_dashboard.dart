@@ -43,7 +43,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
       child: Column(
         children: <Widget>[
           ProfileAppBar(
-            title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
+            title: "Dzień dobry${_userModel?.name != null ? ",\n${_userModel?.name}" : ""}",
             backgroundColor: AppColors.turquoise,
           ),
           Padding(

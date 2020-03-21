@@ -51,7 +51,7 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 42),
+                  const SizedBox(height: 20),
                   Text(
                     "Poznajmy się",
                     style: TextStyle(
@@ -69,7 +69,7 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 20),
                   TextFormField(
                     controller: _nameTextController,
                     autofocus: true,
@@ -93,7 +93,7 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
                 ],
               ),
             ),
-            const SizedBox(height: 36),
+            const SizedBox(height: 20),
             Row(
               children: <Widget>[
                 SizedBox(
@@ -133,7 +133,7 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
   void _proceedToNextScreen(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       UserModel userModel = UserModel(name: _nameTextController.text);
-      Navigator.pushReplacement(context, IntroStepTwoPage.pageRoute(userModel));
+      Navigator.push(context, IntroStepTwoPage.pageRoute(userModel));
     } else {
       setState(() {
         _shouldAutoValidate = true;

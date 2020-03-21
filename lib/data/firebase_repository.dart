@@ -35,4 +35,6 @@ class FirebaseRepository {
     final questions = (await interviewNode.child("questions").once()).value;
     return (questions as List).map((it) => InterviewQuestionModel.fromMap(it)).toList();
   }
+
+  Future<String> getInterviewVideoUrl() async => (await interviewNode.child("videoUrl").once()).value;
 }

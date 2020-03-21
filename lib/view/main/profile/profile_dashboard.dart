@@ -122,7 +122,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
       );
     }
     return ProfileAppBar(
-      title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
+      title: "Dzień dobry${_userModel?.name != null ? ",\n${_userModel?.name}" : ""}",
       backgroundGradient: LinearGradient(
         colors: _presumablySick ? [AppColors.redBase, AppColors.redBase] : _healthStatus.getColors(),
         begin: Alignment.bottomLeft,
@@ -238,6 +238,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
             },
           ),
         ),
+        const SizedBox(height: 20),
       ],
     );
   }

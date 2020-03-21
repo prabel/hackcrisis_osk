@@ -83,7 +83,7 @@ class QuizAnswerBody extends StatelessWidget {
             BlocProvider.of<QuizBloc>(context).add(NextQuestion());
           },
         ),
-        const SizedBox(height: 60),
+        const SizedBox(height: 20),
       ],
     );
   }

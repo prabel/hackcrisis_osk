@@ -85,16 +85,16 @@ class _HealthStatusSurveyPageState extends State<HealthStatusSurveyPage> {
       final UserRepository userRepository = RepositoryProvider.of<UserRepository>(context);
       final UserModel currentUserModel = await userRepository.getCurrentUserModel();
 
-      if (selectedChoice.option != HealthStatus.healthy || selectedChoice.option != HealthStatus.recovered) {
+      if (selectedChoice.option == HealthStatus.healthy || selectedChoice.option == HealthStatus.recovered) {
         await userRepository.createOrUpdateUser(currentUserModel.copyWith(
           healthStatusId: selectedChoice.option.index,
-          presumablySick: null,
+          presumablySick: false,
           quarantineStartDate: null,
         ));
-        Navigator.pushReplacement(context, InterviewPage.pageRoute());
+        Navigator.pushReplacement(context, IntroSummaryPage.pageRoute(selectedChoice));
       } else {
         await userRepository.createOrUpdateUser(currentUserModel.copyWith(healthStatusId: selectedChoice.option.index));
-        Navigator.pushReplacement(context, IntroSummaryPage.pageRoute(selectedChoice));
+        Navigator.pushReplacement(context, InterviewPage.pageRoute());
       }
     }
   }
