@@ -47,7 +47,7 @@ class InterviewNegativeResultsPage extends StatelessWidget {
                   title: "Rozumiem",
                   onClick: () => _handleClickOnNext(context),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 20),
               ],
             ),
           ),

@@ -58,7 +58,7 @@ class _InterviewQuestionBodyState extends State<InterviewQuestionBody> {
             ],
           ),
         ),
-        const SizedBox(height: 60),
+        const SizedBox(height: 20),
       ],
     );
   }

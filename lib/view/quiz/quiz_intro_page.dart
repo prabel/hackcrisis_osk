@@ -45,7 +45,7 @@ class QuizIntroPage extends StatelessWidget {
                   title: "Dalej",
                   onClick: () => Navigator.pushReplacement(context, QuizPage.pageRoute()),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 20),
               ],
             ),
           ),
