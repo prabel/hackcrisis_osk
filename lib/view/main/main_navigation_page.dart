@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:osk_flutter/domain/location/get_current_location_use_case.dart';
 import 'package:osk_flutter/values/app_colors.dart';
+import 'package:osk_flutter/view/main/applications/applications_dashboard.dart';
 import 'package:osk_flutter/view/main/information/information_dashboard.dart';
 import 'package:osk_flutter/view/main/profile/profile_dashboard.dart';
 
@@ -14,9 +16,9 @@ class MainPageDestination {
 }
 
 List<MainPageDestination> mainPageDestinations = [
-  MainPageDestination(0, "Porady", Container(), Icons.lightbulb_outline),
-  MainPageDestination(1, "Informacje", InformationDashboard(), Icons.info_outline),
-  MainPageDestination(2, "Twoja sytuacja", ProfileDashboard(), Icons.person_pin),
+  MainPageDestination(0, "Aplikacje", ApplicationsDashboard(), Icons.lightbulb_outline),
+  MainPageDestination(1, "Aktualności", InformationDashboard(), Icons.info_outline),
+  MainPageDestination(2, "Zdrowie", ProfileDashboard(), Icons.person_pin),
 ];
 
 class MainNavigationPage extends StatefulWidget {
@@ -37,6 +39,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   void initState() {
     super.initState();
     _handleLocationInitilization();
+
+    GetCurrentLocationUseCase().execute();
   }
 
   @override

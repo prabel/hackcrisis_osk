@@ -24,7 +24,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
       child: Column(
         children: <Widget>[
           ProfileAppBar(
-            title: "Paweł",
+            title: "Dzień dobry,\nPaweł",
             backgroundColor: AppColors.turquoise,
           ),
           Padding(

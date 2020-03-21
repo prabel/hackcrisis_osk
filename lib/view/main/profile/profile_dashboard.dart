@@ -14,7 +14,7 @@ class ProfileDashboard extends StatelessWidget {
     return Column(
       children: <Widget>[
         ProfileAppBar(
-          title: "Paweł",
+          title: "Dzień dobry,\nPaweł",
           backgroundGradient: LinearGradient(
             colors: currentHealthStatus.getColors(),
             begin: Alignment.bottomLeft,
