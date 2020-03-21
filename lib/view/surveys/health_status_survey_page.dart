@@ -100,7 +100,12 @@ class _HealthStatusSurveyPageState extends State<HealthStatusSurveyPage> {
         try {
           final videoUrl = await RepositoryProvider.of<FirebaseRepository>(context).getInterviewVideoUrl();
           Navigator.pushReplacement(
-              context, VideoPage.pageRoute(youtubeUrl: videoUrl, nextPageRoute: InterviewPage.pageRoute()));
+              context,
+              VideoPage.pageRoute(
+                youtubeUrl: videoUrl,
+                nextPageRoute: InterviewPage.pageRoute(),
+                nextButtonText: 'Rozpocznij wywiad',
+              ));
         } catch (e) {
           print("Error occurs when loading video url $e");
         }

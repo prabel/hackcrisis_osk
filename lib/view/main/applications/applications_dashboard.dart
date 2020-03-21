@@ -23,7 +23,7 @@ class ApplicationsDashboard extends StatelessWidget {
               } else if (index == 1) {
                 return _buildApplicationCard("mObywatel", AppImages.applicationImage);
               } else {
-                return _buildApplicationCard("Kwarantanna Domowa", AppImages.applicationImage);
+                return _buildApplicationCard("Kwarantanna Domowa", AppImages.quarantinePng);
               }
             },
             separatorBuilder: (context, _) {

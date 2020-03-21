@@ -36,7 +36,13 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
           if (quizQuestions.isEmpty) {
             yield ErrorState("Brak pytań do Quizu");
           }
-          yield ShowQuestionState(quizQuestions[_currentQuestionIndex], _currentQuestionIndex, quizQuestions.length);
+
+          final QuizQuestionModel quizQuestion = quizQuestions[_currentQuestionIndex];
+          if (quizQuestion.videoUrl != null && !(state is ShowVideo)) {
+            yield ShowVideo(quizQuestion.videoUrl);
+          } else {
+            yield ShowQuestionState(quizQuestions[_currentQuestionIndex], _currentQuestionIndex, quizQuestions.length);
+          }
         } catch (e) {
           yield ErrorState(e);
         }
@@ -53,9 +59,16 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     }
 
     if (event is NextQuestion) {
-      if (quizQuestions.length > _currentQuestionIndex + 1) {
-        _currentQuestionIndex = _currentQuestionIndex + 1;
+      if (state is ShowVideo) {
         yield ShowQuestionState(quizQuestions[_currentQuestionIndex], _currentQuestionIndex, quizQuestions.length);
+      } else if (quizQuestions.length > _currentQuestionIndex + 1) {
+        _currentQuestionIndex = _currentQuestionIndex + 1;
+        final QuizQuestionModel quizQuestion = quizQuestions[_currentQuestionIndex];
+        if (quizQuestion.videoUrl != null && !(state is ShowVideo)) {
+          yield ShowVideo(quizQuestion.videoUrl);
+        } else {
+          yield ShowQuestionState(quizQuestions[_currentQuestionIndex], _currentQuestionIndex, quizQuestions.length);
+        }
       } else {
         yield ShowResultsState(_answerMap);
       }

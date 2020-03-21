@@ -34,6 +34,14 @@ class ShowAnswerState extends QuizState {
   List<Object> get props => [quizQuestionModel, quizAnswerModel, currentIndex, totalNumberOfQuestions];
 }
 
+class ShowVideo extends QuizState {
+  final String videoUrl;
+  ShowVideo(this.videoUrl);
+
+  @override
+  List<Object> get props => [videoUrl];
+}
+
 class ShowResultsState extends QuizState {
   final HashMap<QuizQuestionModel, bool> answerMap;
 

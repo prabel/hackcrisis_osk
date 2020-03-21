@@ -59,11 +59,13 @@ class QuizPage extends StatelessWidget {
         if (state is ShowResultsState) {
           Navigator.pushReplacement(context, QuizResultsPage.pageRoute(state.answerMap));
         }
-        if (state is ShowQuestionState) {
-          Navigator.push(context, VideoPage.pageRoute(youtubeUrl: state.quizQuestionModel.videoUrl));
+        if (state is ShowVideo) {
+          Navigator.push(context, VideoPage.pageRoute(youtubeUrl: state.videoUrl)).then((_) {
+            BlocProvider.of<QuizBloc>(context).add(NextQuestion());
+          });
         }
       },
-      buildWhen: (_, newState) => !(newState is ShowResultsState),
+      buildWhen: (_, newState) => !(newState is ShowResultsState) && !(newState is ShowVideo),
       builder: (BuildContext context, QuizState state) {
         if (state is ShowQuestionState) {
           return QuizQuestionBody(state);

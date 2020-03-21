@@ -315,10 +315,19 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "Powiatowa Stacja Sanitarno-Epidemiologiczna",
+              "Wojewódzka Stacja Sanitarno-Epidemiologiczna w Warszawie",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "ul. Żelazna 79\n00-875 Warszawa",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
                 color: Colors.black,
               ),
             ),
@@ -327,9 +336,9 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
               child: PrimaryButton(
                 width: 290,
                 height: 47,
-                title: "Zadzwoń: 89 767 23 22",
+                title: "Zadzwoń: 22 620 90 01",
                 onClick: () {
-                  launch('tel:897672322');
+                  launch('tel:22 620 90 01');
                 },
               ),
             )
