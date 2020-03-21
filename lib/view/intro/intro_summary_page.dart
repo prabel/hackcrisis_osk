@@ -36,7 +36,8 @@ class IntroSummaryPage extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: const IntroAppBar(
-            appBarTheme: IntroAppBarTheme.light,
+            appBarTheme: IntroAppBarTheme.dark,
+            showBottomDash: false,
           ),
           body: Stack(
             children: <Widget>[

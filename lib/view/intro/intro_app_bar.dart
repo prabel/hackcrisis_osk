@@ -6,13 +6,21 @@ enum IntroAppBarTheme { light, dark }
 
 class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IntroAppBarTheme appBarTheme;
+  final Color backgroundColor;
+  final bool showBottomDash;
 
-  const IntroAppBar({Key key, this.appBarTheme = IntroAppBarTheme.dark}) : super(key: key);
+  const IntroAppBar({
+    Key key,
+    this.appBarTheme = IntroAppBarTheme.dark,
+    this.backgroundColor = Colors.white,
+    this.showBottomDash = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
+      color: backgroundColor,
       width: double.infinity,
       child: Align(
         alignment: Alignment.bottomLeft,
@@ -25,7 +33,7 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
               Row(
                 children: <Widget>[
                   Text(
-                    "Osobisty System\nKomunikacji",
+                    "osobisty system\nkomunikacji",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -38,10 +46,13 @@ class IntroAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
               SizedBox(height: 24),
-              Container(
-                height: 2.5,
-                width: 34,
-                color: appBarTheme == IntroAppBarTheme.light ? Colors.white : Color(0XFFCFCFCF),
+              Visibility(
+                visible: showBottomDash,
+                child: Container(
+                  height: 2.5,
+                  width: 34,
+                  color: appBarTheme == IntroAppBarTheme.light ? Colors.white : Color(0XFFCFCFCF),
+                ),
               )
             ],
           ),

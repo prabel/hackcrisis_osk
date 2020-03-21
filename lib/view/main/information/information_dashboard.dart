@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osk_flutter/data/firebase_repository.dart';
+import 'package:osk_flutter/data/user_repository.dart';
+import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/assistance_statuses.dart';
 import 'package:osk_flutter/view/main/information/assistance_informations_holder.dart';
@@ -16,7 +19,23 @@ class InformationDashboard extends StatefulWidget {
 }
 
 class _InformationDashboardState extends State<InformationDashboard> {
-  List<AssistanceStatus> currentAssistanceStatus = [];
+  UserModel _userModel;
+  List<AssistanceStatus> _currentAssistanceStatus = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrectUserInformation();
+  }
+
+  void _getCurrectUserInformation() {
+    RepositoryProvider.of<UserRepository>(context).getCurrentUserModel().then((userModel) {
+      setState(() {
+        _userModel = userModel;
+        _currentAssistanceStatus = userModel?.getAssistaanceStatuses();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +43,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
       child: Column(
         children: <Widget>[
           ProfileAppBar(
-            title: "Dzień dobry,\nPaweł",
+            title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
             backgroundColor: AppColors.turquoise,
           ),
           Padding(
@@ -34,10 +53,10 @@ class _InformationDashboardState extends State<InformationDashboard> {
               children: <Widget>[
                 const SizedBox(height: 20),
                 _buildAssistanceStatusHeader(),
-                if (currentAssistanceStatus.isEmpty) ...[
+                if (_currentAssistanceStatus.isEmpty) ...[
                   _buildEmptyAssistanceStatusContainer(),
                 ],
-                if (currentAssistanceStatus.isNotEmpty) ...[
+                if (_currentAssistanceStatus.isNotEmpty) ...[
                   _buildAssistanceStatusesContainer(),
                   const SizedBox(height: 34),
                   Text(
@@ -52,7 +71,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
                   _buildInformationsBaseOnStatuses(),
                 ],
                 const SizedBox(height: 24),
-                StatisticWidget(FirebaseRepository())
+                StatisticWidget(RepositoryProvider.of<FirebaseRepository>(context))
               ],
             ),
           )
@@ -91,7 +110,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
   Widget _buildInformationsBaseOnStatuses() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: currentAssistanceStatus
+      children: _currentAssistanceStatus
           .map((it) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: AssistanceInformationHolder(it),
@@ -103,7 +122,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
   Widget _buildAssistanceStatusesContainer() {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: currentAssistanceStatus
+      children: _currentAssistanceStatus
           .map((it) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: AssistanceStatusHolder(it),
@@ -156,12 +175,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
   }
 
   void _openAssistanceSurvey() {
-    Navigator.push(context, AssistanceSurveyPage.pageRoute(currentAssistanceStatus)).then((value) {
-      if (value != null && value is List<AssistanceStatus>) {
-        setState(() {
-          currentAssistanceStatus = value;
-        });
-      }
-    });
+    Navigator.push(context, AssistanceSurveyPage.pageRoute(_currentAssistanceStatus))
+        .then((value) => _getCurrectUserInformation());
   }
 }

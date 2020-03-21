@@ -4,18 +4,20 @@ import 'package:osk_flutter/view/surveys/elements/question_choice_item.dart';
 
 typedef OnChoiceSelect(QuestionChoiceOption selectedChoice);
 
-class OneChoiceQuestionWidget extends StatefulWidget {
-  final List<QuestionChoiceOption> options;
+class OneChoiceQuestionWidget<T> extends StatefulWidget {
+  final List<QuestionChoiceOption<T>> options;
   final OnChoiceSelect onChoiceSelect;
+  final bool showQuestionMark;
 
-  const OneChoiceQuestionWidget({Key key, this.options, this.onChoiceSelect}) : super(key: key);
+  const OneChoiceQuestionWidget({Key key, this.options, this.onChoiceSelect, this.showQuestionMark = true})
+      : super(key: key);
 
   @override
-  _OneChoiceQuestionWidgetState createState() => _OneChoiceQuestionWidgetState();
+  _OneChoiceQuestionWidgetState<T> createState() => _OneChoiceQuestionWidgetState<T>();
 }
 
-class _OneChoiceQuestionWidgetState extends State<OneChoiceQuestionWidget> {
-  QuestionChoiceOption selectedItem;
+class _OneChoiceQuestionWidgetState<T> extends State<OneChoiceQuestionWidget> {
+  QuestionChoiceOption<T> selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class _OneChoiceQuestionWidgetState extends State<OneChoiceQuestionWidget> {
           .map((item) => ChoiceItem(
                 questionChoiceOption: item,
                 isChecked: item == selectedItem,
+                showQuestionMark: widget.showQuestionMark,
                 onClick: () {
                   setState(() {
                     selectedItem = item;

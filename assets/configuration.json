@@ -1,40 +1,78 @@
 {
+  "quiz": {
+    "questions" : [
+      {
+        "question" : "Czy na wózku sklepowym może utrzymywać koronawirus?",
+        "answers" : [
+          {
+            "text" : "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta.",
+            "valid" : false
+          },
+          {
+            "text" : "Nie, wirus nie może się utrzymać.",
+            "valid" : true
+          },
+          {
+            "text" : "Nauka nie zna odpowiedzi na to pytanie.",
+            "valid" : false
+          }
+        ]
+      },
+      {
+        "question" : "Czy na wózku sklepowym może utrzymywać koronawirus? v2",
+        "answers" : [
+          {
+            "text" : "Wirus może się utrzymać, ale żeby się zarazić trzeba by dotkąć ręką twarz, oko lub usta. v2",
+            "valid" : false
+          },
+          {
+            "text" : "Nie, wirus nie może się utrzymać. v2",
+            "valid" : true
+          },
+          {
+            "text" : "Nauka nie zna odpowiedzi na to pytanie. v2",
+            "valid" : false
+          }
+        ]
+      }
+    ]
+  },
   "statistics": {
     "districts": {
       "mazowieckie": {
         "cured": 0,
         "deaths": 0,
-        "infected": 107
+        "infected": 112
       },
       "dolnośląskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 2,
+        "infected": 61
       },
       "łódzkie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 57
       },
       "śląskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 49
       },
       "lubelskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 1,
+        "infected": 34
       },
       "podkarpackie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 1,
+        "infected": 19
       },
       "wielkopolskie": {
         "cured": 0,
         "deaths": 1,
-        "infected": 18
+        "infected": 22
       },
       "warmińsko-mazurskie": {
         "cured": 0,
@@ -42,50 +80,50 @@
         "infected": 17
       },
       "małopolskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 12
       },
       "kujawsko-pomorskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 9,
+        "deaths": 0,
+        "infected": 15
       },
       "opolskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 11
       },
       "pomorskie": {
         "cured": 0,
         "deaths": 0,
-        "infected": 10
+        "infected": 11
       },
       "lubuskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 5
       },
       "zachodniopomorskie": {
         "cured": 0,
         "deaths": 0,
-        "infected": 9
+        "infected": 10
       },
       "świętokrzyskie": {
-        "cured": 1,
-        "deaths": 5,
-        "infected": 425
+        "cured": 0,
+        "deaths": 0,
+        "infected": 7
       },
       "podlaskie": {
         "cured": 0,
         "deaths": 0,
-        "infected": 3
+        "infected": 4
       }
     },
     "poland": {
       "cured": 1,
       "deaths": 5,
-      "infected": 425
+      "infected": 439
     }
   }
 }

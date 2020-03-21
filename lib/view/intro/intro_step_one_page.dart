@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
@@ -14,6 +15,7 @@ class IntroStepOnePage extends StatelessWidget {
     return Scaffold(
       appBar: const IntroAppBar(),
       body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           SvgPicture.asset(AppImages.background),
           const _IntroStepOneBody(),
@@ -46,60 +48,59 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 42),
-            Text(
-              "Poznajmy się",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              "Jak masz na imię?",
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 42),
+                  Text(
+                    "Poznajmy się",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    "Jak masz na imię?",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 36),
+                  TextFormField(
+                    controller: _nameTextController,
+                    autofocus: true,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: InputDecoration(
+                      filled: true,
+                      border: const OutlineInputBorder(
+                        borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      labelText: "Imię",
+                      hintText: "Wpisz swoje imię",
+                    ),
+                    validator: (text) {
+                      if (text.isEmpty) {
+                        return "Podaj swoje imię aby kontynuować";
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 36),
-            TextFormField(
-              controller: _nameTextController,
-              autofocus: true,
-              decoration: InputDecoration(
-                filled: true,
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: AppColors.primaryBlue),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                labelText: "Imię",
-                hintText: "Wpisz swoje imię",
-              ),
-              validator: (text) {
-                if (text.isEmpty) {
-                  return "Podaj swoje imię aby kontynuować";
-                }
-                return null;
-              },
-            ),
-            const Spacer(),
             Row(
               children: <Widget>[
                 SizedBox(
                   width: 215,
                   child: PrimaryButton(
                     title: "Dalej",
-                    onClick: () {
-                      if (_formKey.currentState.validate()) {
-                        Navigator.push(context, IntroStepTwoPage.pageRoute());
-                      } else {
-                        setState(() {
-                          _shouldAutoValidate = true;
-                        });
-                      }
-                    },
+                    onClick: () => _proceedToNextScreen(context),
                   ),
                 ),
                 const Spacer(),
@@ -122,10 +123,21 @@ class _IntroStepOneBodyState extends State<_IntroStepOneBody> {
                 const Spacer(),
               ],
             ),
-            const SizedBox(height: 70),
+            const SizedBox(height: 16),
           ],
         ),
       ),
     );
+  }
+
+  void _proceedToNextScreen(BuildContext context) async {
+    if (_formKey.currentState.validate()) {
+      UserModel userModel = UserModel(name: _nameTextController.text);
+      Navigator.pushReplacement(context, IntroStepTwoPage.pageRoute(userModel));
+    } else {
+      setState(() {
+        _shouldAutoValidate = true;
+      });
+    }
   }
 }

@@ -59,7 +59,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            "Osobisty\nSystem\nKomunikacji",
+                            "osobisty\nsystem\nkomunikacji",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

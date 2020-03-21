@@ -5,12 +5,14 @@ class ChoiceItem extends StatelessWidget {
   final bool isChecked;
   final QuestionChoiceOption questionChoiceOption;
   final VoidCallback onClick;
+  final bool showQuestionMark;
 
   const ChoiceItem({
     Key key,
     this.questionChoiceOption,
     this.onClick,
     this.isChecked = true,
+    this.showQuestionMark = true,
   }) : super(key: key);
 
   @override
@@ -50,7 +52,7 @@ class ChoiceItem extends StatelessWidget {
           const SizedBox(width: 20),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
                 questionChoiceOption.title,
                 style: TextStyle(
@@ -62,9 +64,12 @@ class ChoiceItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Icon(
-            Icons.check_circle,
-            color: Colors.white,
+          Visibility(
+            visible: showQuestionMark,
+            child: Icon(
+              Icons.check_circle,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(width: 12),
         ],
@@ -94,12 +99,15 @@ class ChoiceItem extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Expanded(
-            child: Text(
-              questionChoiceOption.title,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                questionChoiceOption.title,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),

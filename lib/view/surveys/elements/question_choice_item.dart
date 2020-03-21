@@ -7,7 +7,7 @@ class QuestionChoiceOption<T> extends Equatable {
   final List<Color> indicatorColors;
 
   @override
-  List<Object> get props => [title];
+  List<Object> get props => [title, option];
 
   const QuestionChoiceOption(this.option, this.title, this.indicatorColors);
 

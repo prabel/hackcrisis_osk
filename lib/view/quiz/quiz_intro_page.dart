@@ -4,12 +4,10 @@ import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
-import 'package:osk_flutter/view/intro/intro_step_one_page.dart';
+import 'package:osk_flutter/view/quiz/quiz_page.dart';
 
-class IntroPage extends StatelessWidget {
-  static MaterialPageRoute pageRoute() => MaterialPageRoute(
-        builder: (BuildContext context) => IntroPage(),
-      );
+class QuizIntroPage extends StatelessWidget {
+  static MaterialPageRoute pageRoute() => MaterialPageRoute(builder: (BuildContext context) => QuizIntroPage());
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +25,7 @@ class IntroPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Text(
-                  "Dzień dobry,\nto Twój Osobisty\nSystem Komunikacji",
+                  "Quiz: podstawowa wiedza\no koronawirusie",
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.black,
@@ -35,19 +33,19 @@ class IntroPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-                _getCheckmarkItem("Prawdziwe informacje"),
+                _getCheckmarkItem("Posłuchaj wypowiedzi specjalistów."),
                 const SizedBox(height: 20),
-                _getCheckmarkItem("Przydatne porady"),
+                _getCheckmarkItem("Odpowiedz na pytania."),
                 const SizedBox(height: 20),
-                _getCheckmarkItem("Pomoc medyczna"),
+                _getCheckmarkItem("Utrwal swoją wiedzę."),
+                const SizedBox(height: 20),
+                _getCheckmarkItem("Podziel się swoim wynikiem!"),
                 const SizedBox(height: 50),
                 PrimaryButton(
-                  title: "Rozpocznij",
-                  onClick: () {
-                    Navigator.pushReplacement(context, IntroStepOnePage.pageRoute());
-                  },
+                  title: "Dalej",
+                  onClick: () => Navigator.pushReplacement(context, QuizPage.pageRoute()),
                 ),
-                const SizedBox(height: 70),
+                const SizedBox(height: 60),
               ],
             ),
           ),
@@ -59,17 +57,23 @@ class IntroPage extends StatelessWidget {
   Widget _getCheckmarkItem(String text) {
     return Row(
       children: <Widget>[
-        Icon(
-          Icons.check,
-          color: AppColors.primaryBlue,
+        Container(
+          height: 12,
+          width: 12,
+          decoration: BoxDecoration(
+            color: AppColors.primaryBlue,
+            shape: BoxShape.circle,
+          ),
         ),
         const SizedBox(width: 24),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 17,
-            color: AppColors.darkGrey,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 17,
+              color: AppColors.darkGrey,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

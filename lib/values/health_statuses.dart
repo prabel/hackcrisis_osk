@@ -11,35 +11,35 @@ enum HealthStatus {
 }
 
 extension HealthStatusExtensions on HealthStatus {
-  QuestionChoiceOption getQuestionChoiceOption() {
+  QuestionChoiceOption<HealthStatus> getQuestionChoiceOption() {
     switch (this) {
       case HealthStatus.healthy:
-        return QuestionChoiceOption(this.index, "Jestem, zdrowy", [
+        return QuestionChoiceOption(this, "Jestem zdrowy", [
           const Color(0Xff3AC168),
           const Color(0XFF84C749),
         ]);
       case HealthStatus.recovered:
-        return QuestionChoiceOption(this.index, "Wyzdrowiałem", [
+        return QuestionChoiceOption(this, "Wyzdrowiałem", [
           const Color(0Xff3AC168),
           const Color(0XFF84C749),
         ]);
       case HealthStatus.probablySick:
-        return QuestionChoiceOption(this.index, "Obawiam się, że ja choruję", [
+        return QuestionChoiceOption(this, "Obawiam się, że ja choruję", [
           const Color(0XffD14457),
           const Color(0XFFD14486),
         ]);
       case HealthStatus.closePersonSick:
-        return QuestionChoiceOption(this.index, "Bliska mi osoba choruje", [
+        return QuestionChoiceOption(this, "Bliska mi osoba choruje", [
           const Color(0XffD14457),
           const Color(0XFFD14486),
         ]);
       case HealthStatus.personInAreaIsSick:
-        return QuestionChoiceOption(this.index, "Ktoś w mojej okolicy choruje", [
+        return QuestionChoiceOption(this, "Ktoś w mojej okolicy choruje", [
           const Color(0XffDBA513),
           const Color(0XFFDBA513),
         ]);
       case HealthStatus.otherDisease:
-        return QuestionChoiceOption(this.index, "Ktoś w mojej okolicy choruje", [
+        return QuestionChoiceOption(this, "Mam inną chorobę", [
           const Color(0XffDBA513),
           const Color(0XFFDBA513),
         ]);

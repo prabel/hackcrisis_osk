@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osk_flutter/data/user_repository.dart';
+import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/values/assistance_statuses.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
@@ -48,8 +51,12 @@ class _AssistanceSurveyPageState extends State<AssistanceSurveyPage> {
     return Scaffold(
       appBar: const IntroAppBar(),
       body: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
-          Image.asset(AppImages.backgroundPng),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Image.asset(AppImages.backgroundPng),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
             child: Column(
@@ -93,9 +100,7 @@ class _AssistanceSurveyPageState extends State<AssistanceSurveyPage> {
                 PrimaryButton(
                   title: "Dalej",
                   onClick: () {
-                    if (selectedChoices.isNotEmpty) {
-                      Navigator.pop(context, selectedChoices.map((item) => item.option).toList());
-                    }
+                    _saveSelectedChoice(context);
                   },
                 ),
                 const SizedBox(height: 50),
@@ -105,5 +110,16 @@ class _AssistanceSurveyPageState extends State<AssistanceSurveyPage> {
         ],
       ),
     );
+  }
+
+  Future _saveSelectedChoice(BuildContext context) async {
+    if (selectedChoices.isNotEmpty) {
+      final UserRepository userRepository = RepositoryProvider.of<UserRepository>(context);
+      final UserModel currentUserModel = await userRepository.getCurrentUserModel();
+      await userRepository.createOrUpdateUser(
+          currentUserModel.copyWith(assistanceStatusIds: selectedChoices.map((it) => it.option.index).toList()));
+
+      Navigator.pop(context, selectedChoices.map((item) => item.option).toList());
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osk_flutter/data/firebase_repository.dart';
+import 'package:osk_flutter/data/location_repository.dart';
 import 'package:osk_flutter/domain/location/get_current_location_use_case.dart';
 import 'package:osk_flutter/domain/location/get_statistic_for_district_use_case.dart';
 import 'package:osk_flutter/domain/location/get_statistic_for_poland_use_case.dart';
@@ -22,7 +23,7 @@ class StatisticWidget extends StatelessWidget {
       create: (context) => StatisticBloc(
         getStatisticForPolandUseCase: GetStatisticForPolandUseCase(firebaseRepository),
         getStatisticForDistrictUseCase: GetStatisticForDistrictUseCase(firebaseRepository),
-        getCurrentLocationUseCase: GetCurrentLocationUseCase(),
+        getCurrentLocationUseCase: GetCurrentLocationUseCase(context.repository<LocationRepository>()),
       )..add(LoadData()),
       child: _buildBody(context),
     );
