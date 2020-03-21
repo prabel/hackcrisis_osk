@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osk_flutter/data/user_repository.dart';
@@ -6,6 +8,7 @@ import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/values/health_statuses.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
+import 'package:osk_flutter/view/interview/interview_call_question_page.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
 import 'package:osk_flutter/view/quiz/quiz_intro_page.dart';
 import 'package:osk_flutter/view/surveys/health_status_survey_page.dart';
@@ -27,11 +30,19 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
   UserModel _userModel;
   HealthStatus _healthStatus = HealthStatus.healthy;
   bool _presumablySick = false;
+  Timer _timer;
+  DateTime _quarantineStartDate;
 
   @override
   void initState() {
     super.initState();
     _getCurrectUserInformation();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   void _getCurrectUserInformation() {
@@ -42,7 +53,14 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
           _userModel = userModel;
           _healthStatus = healthStatus;
           _presumablySick = userModel.presumablySick ?? false;
+          _quarantineStartDate = userModel.quarantineStartDate;
         });
+        if (userModel.presumablySick && userModel?.quarantineStartDate == null) {
+          _timer?.cancel();
+          _timer = Timer(Duration(seconds: 5), () {
+            Navigator.push(context, InterviewCallQuestionPage.pageRoute());
+          });
+        }
       } else {
         Navigator.push(context, HealthStatusSurveyPage.pageRoute()).then((_) {
           _getCurrectUserInformation();
@@ -55,14 +73,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        ProfileAppBar(
-          title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
-          backgroundGradient: LinearGradient(
-            colors: _presumablySick ? [AppColors.redBase, AppColors.redBase] : _healthStatus.getColors(),
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ),
-        ),
+        _buildAppBar(),
         Expanded(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -81,8 +92,8 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
                 const SizedBox(height: 16),
                 _buildHealthStatusContainer(context),
                 if (!_presumablySick) ...[
-                  _builQuizCard(context),
                   const SizedBox(height: 20),
+                  _builQuizCard(context),
                 ],
                 const SizedBox(height: 20),
                 _buildDiagnosisContainer(),
@@ -99,9 +110,31 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
     );
   }
 
+  ProfileAppBar _buildAppBar() {
+    if (_quarantineStartDate != null) {
+      return ProfileAppBar(
+        title: "Kwarantanna\n${(_quarantineStartDate.add(Duration(days: 15)).difference(DateTime.now()).inDays)} DNI",
+        backgroundGradient: LinearGradient(
+          colors: [AppColors.redBase, AppColors.redBase],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+      );
+    }
+    return ProfileAppBar(
+      title: "Dzień dobry${_userModel?.name != null ? ",\nPaweł" : ""}",
+      backgroundGradient: LinearGradient(
+        colors: _presumablySick ? [AppColors.redBase, AppColors.redBase] : _healthStatus.getColors(),
+        begin: Alignment.bottomLeft,
+        end: Alignment.topRight,
+      ),
+    );
+  }
+
   Widget _buildHealthStatusContainer(BuildContext context) {
     return InkWell(
       onTap: () {
+        _timer?.cancel();
         Navigator.of(context).push(HealthStatusSurveyPage.pageRoute());
       },
       child: Container(
@@ -168,6 +201,10 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
           ),
         ),
         const SizedBox(height: 20),
+        if (_quarantineStartDate != null) ...[
+          _buildQuarantineApplicationCard(),
+          const SizedBox(height: 20),
+        ],
         Text(
           "Kontakt z pomocą medyczną",
           style: TextStyle(
@@ -208,6 +245,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
   Widget _builQuizCard(BuildContext context) {
     return InkWell(
       onTap: () {
+        _timer?.cancel();
         Navigator.push(context, QuizIntroPage.pageRoute());
       },
       child: Container(
@@ -291,6 +329,45 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
                 },
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildQuarantineApplicationCard() {
+    return Card(
+      margin: EdgeInsets.all(0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(13),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: <Widget>[
+            Image.asset(AppImages.quarantinePng),
+            const SizedBox(height: 10),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    "Kwarantanna Domowa",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                PrimaryButton(
+                  title: "Otwórz",
+                  height: 47,
+                  width: 142,
+                  onClick: () {},
+                )
+              ],
+            ),
           ],
         ),
       ),

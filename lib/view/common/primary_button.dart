@@ -6,15 +6,17 @@ class PrimaryButton extends StatelessWidget {
   final String title;
   final double height, width;
   final Color backgroundColor;
+  final Color textColor;
 
-  const PrimaryButton({
-    Key key,
-    this.onClick,
-    this.title,
-    this.height = 60,
-    this.width = double.infinity,
-    this.backgroundColor = AppColors.primaryBlue,
-  }) : super(key: key);
+  const PrimaryButton(
+      {Key key,
+      this.onClick,
+      this.title,
+      this.height = 60,
+      this.width = double.infinity,
+      this.backgroundColor = AppColors.primaryBlue,
+      this.textColor = Colors.white})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class PrimaryButton extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 18,
-              color: Colors.white,
+              color: textColor,
               fontWeight: FontWeight.w600,
             ),
           ),

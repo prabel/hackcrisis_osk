@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:osk_flutter/data/firebase_repository.dart';
 import 'package:osk_flutter/data/location_repository.dart';
 import 'package:osk_flutter/data/user_repository.dart';
@@ -16,6 +17,7 @@ class OskApplication extends StatelessWidget {
     ));
 
     FirebaseDatabase.instance.setPersistenceEnabled(true);
+    _initializeNotifications();
 
     return MultiRepositoryProvider(
       providers: [
@@ -34,5 +36,23 @@ class OskApplication extends StatelessWidget {
         home: SplashPage(),
       ),
     );
+  }
+
+  Future<void> _initializeNotifications() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    await flutterLocalNotificationsPlugin.initialize(
+      InitializationSettings(
+        AndroidInitializationSettings('@mipmap/ic_launcher'),
+        IOSInitializationSettings(),
+      ),
+      onSelectNotification: onSelectNotification,
+    );
+  }
+
+  Future onSelectNotification(String payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: ' + payload);
+    }
   }
 }

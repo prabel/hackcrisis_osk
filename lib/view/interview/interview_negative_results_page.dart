@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
@@ -45,7 +46,7 @@ class InterviewNegativeResultsPage extends StatelessWidget {
                 Spacer(),
                 PrimaryButton(
                   title: "Rozumiem",
-                  onClick: () => Navigator.pushAndRemoveUntil(context, MainNavigationPage.pageRoute(), (_) => false),
+                  onClick: () => _handleClickOnNext(context),
                 ),
                 const SizedBox(height: 60),
               ],
@@ -53,6 +54,29 @@ class InterviewNegativeResultsPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future _handleClickOnNext(BuildContext context) async {
+    await _scheduleNotification();
+
+    Navigator.pushAndRemoveUntil(context, MainNavigationPage.pageRoute(), (_) => false);
+  }
+
+  Future _scheduleNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'your other channel id', 'your other channel name', 'your other channel description');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    NotificationDetails platformChannelSpecifics =
+        NotificationDetails(androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await FlutterLocalNotificationsPlugin().schedule(
+      0,
+      'Osobisty system komunikacji',
+      'Czy zadzwoniłaś już do stacji epidemiologicznej?',
+      DateTime.now().add(Duration(seconds: 5)),
+      platformChannelSpecifics,
+      androidAllowWhileIdle: true,
     );
   }
 }

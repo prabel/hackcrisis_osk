@@ -8,6 +8,7 @@ class UserModel extends Equatable {
   final int healthStatusId;
   final List<int> assistanceStatusIds;
   final bool presumablySick;
+  final DateTime quarantineStartDate;
 
   UserModel({
     this.name,
@@ -15,6 +16,7 @@ class UserModel extends Equatable {
     this.healthStatusId,
     this.assistanceStatusIds,
     this.presumablySick,
+    this.quarantineStartDate,
   });
 
   Map<dynamic, dynamic> toMap() {
@@ -24,6 +26,7 @@ class UserModel extends Equatable {
       'healthStatusId': this.healthStatusId,
       'assistanceStatusIds': this.assistanceStatusIds,
       'presumablySick': this.presumablySick,
+      'quarantineStartDate': this.quarantineStartDate?.millisecondsSinceEpoch
     };
   }
 
@@ -33,32 +36,35 @@ class UserModel extends Equatable {
 
   factory UserModel.fromMap(Map<dynamic, dynamic> map) {
     return UserModel(
-      name: map['name'],
-      age: map['age'],
-      healthStatusId: map['healthStatusId'],
-      assistanceStatusIds: map['assistanceStatusIds'] != null ? (map['assistanceStatusIds'] as List).cast<int>() : [],
-      presumablySick: map['presumablySick'],
-    );
+        name: map['name'],
+        age: map['age'],
+        healthStatusId: map['healthStatusId'],
+        assistanceStatusIds: map['assistanceStatusIds'] != null ? (map['assistanceStatusIds'] as List).cast<int>() : [],
+        presumablySick: map['presumablySick'],
+        quarantineStartDate: map['quarantineStartDate'] != null
+            ? DateTime.fromMillisecondsSinceEpoch(map['quarantineStartDate'])
+            : null);
   }
 
-  UserModel copyWith({
-    String name,
-    String age,
-    int healthStatusId,
-    List<int> assistanceStatusIds,
-    bool presumablySick,
-  }) {
+  UserModel copyWith(
+      {String name,
+      String age,
+      int healthStatusId,
+      List<int> assistanceStatusIds,
+      bool presumablySick,
+      DateTime quarantineStartDate}) {
     return new UserModel(
       name: name ?? this.name,
       age: age ?? this.age,
       healthStatusId: healthStatusId ?? this.healthStatusId,
       assistanceStatusIds: assistanceStatusIds ?? this.assistanceStatusIds,
       presumablySick: presumablySick ?? this.presumablySick,
+      quarantineStartDate: quarantineStartDate ?? this.quarantineStartDate,
     );
   }
 
   @override
-  List<Object> get props => [name, age, healthStatusId, assistanceStatusIds, presumablySick];
+  List<Object> get props => [name, age, healthStatusId, assistanceStatusIds, presumablySick, quarantineStartDate];
 
   HealthStatus getHealthStatusOrNull() {
     if (healthStatusId != null) {
