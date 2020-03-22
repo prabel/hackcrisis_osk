@@ -5,7 +5,6 @@ import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/intro/intro_app_bar.dart';
 import 'package:osk_flutter/view/intro/intro_step_one_page.dart';
-import 'package:osk_flutter/view/video/video_page.dart';
 
 class IntroPage extends StatelessWidget {
   static MaterialPageRoute pageRoute() => MaterialPageRoute(
@@ -45,12 +44,7 @@ class IntroPage extends StatelessWidget {
                 PrimaryButton(
                   title: "Rozpocznij",
                   onClick: () {
-                    Navigator.pushReplacement(
-                        context,
-                        VideoPage.pageRoute(
-                            nextPageRoute: IntroStepOnePage.pageRoute(),
-                            youtubeUrl: "https://www.youtube.com/watch?v=-ca7tda-xXc",
-                            nextButtonText: "Rozumiem"));
+                    Navigator.pushReplacement(context, IntroStepOnePage.pageRoute());
                   },
                 ),
                 const SizedBox(height: 70),
