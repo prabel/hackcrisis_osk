@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:osk_flutter/values/app_images.dart';
 import 'package:osk_flutter/view/common/primary_button.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
@@ -21,9 +22,14 @@ class ApplicationsDashboard extends StatelessWidget {
               if (index == 0) {
                 return const SizedBox(height: 170);
               } else if (index == 1) {
-                return _buildApplicationCard("mObywatel", AppImages.applicationImage);
+                return _buildApplicationCard("mObywatel", AppImages.applicationImage,
+                    () => LaunchReview.launch(androidAppId: "pl.nask.mobywatel", iOSAppId: "1339613469"));
               } else {
-                return _buildApplicationCard("Kwarantanna Domowa", AppImages.quarantinePng);
+                return _buildApplicationCard(
+                  "Kwarantanna Domowa",
+                  AppImages.quarantinePng,
+                  () => LaunchReview.launch(androidAppId: "pl.nask.droid.kwarantannadomowa", iOSAppId: "1502997499"),
+                );
               }
             },
             separatorBuilder: (context, _) {
@@ -34,7 +40,7 @@ class ApplicationsDashboard extends StatelessWidget {
     );
   }
 
-  Card _buildApplicationCard(String applicationName, String imagePath) {
+  Card _buildApplicationCard(String applicationName, String imagePath, VoidCallback onClick) {
     return Card(
       margin: EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
@@ -63,7 +69,7 @@ class ApplicationsDashboard extends StatelessWidget {
                   title: "Otwórz",
                   height: 47,
                   width: 142,
-                  onClick: () {},
+                  onClick: onClick,
                 )
               ],
             ),

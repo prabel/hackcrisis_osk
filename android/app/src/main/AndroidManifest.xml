@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="osk_flutter"
+        android:label="Osobisty System Komunikacji"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

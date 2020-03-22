@@ -7,6 +7,7 @@ import 'package:osk_flutter/values/app_colors.dart';
 import 'package:osk_flutter/values/assistance_statuses.dart';
 import 'package:osk_flutter/view/main/information/assistance_information_widget.dart';
 import 'package:osk_flutter/view/main/information/assistance_status_holder.dart';
+import 'package:osk_flutter/view/main/information/daily_news_widget.dart';
 import 'package:osk_flutter/view/main/information/statistic/statistic_widget.dart';
 import 'package:osk_flutter/view/main/profile/profile_app_bar.dart';
 import 'package:osk_flutter/view/surveys/assistance_survey_page.dart';
@@ -60,6 +61,7 @@ class _InformationDashboardState extends State<InformationDashboard> {
                   _buildAssistanceStatusesContainer(),
                   AssistanceInformationWidget(),
                 ],
+                DailyNewsWidget(),
                 const SizedBox(height: 24),
                 StatisticWidget(RepositoryProvider.of<FirebaseRepository>(context))
               ],

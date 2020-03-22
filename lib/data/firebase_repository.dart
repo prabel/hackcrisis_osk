@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:osk_flutter/model/assistance_extra_information_model.dart';
+import 'package:osk_flutter/model/daily_news_item_model.dart';
 import 'package:osk_flutter/model/interview_question_model.dart';
 import 'package:osk_flutter/model/quiz_question_model.dart';
 import 'package:osk_flutter/model/statistic_model.dart';
@@ -11,9 +12,12 @@ class FirebaseRepository {
   final DatabaseReference quizNode = FirebaseDatabase.instance.reference().child("quiz");
   final DatabaseReference interviewNode = FirebaseDatabase.instance.reference().child("interview");
   final DatabaseReference assistancewNode = FirebaseDatabase.instance.reference().child("assistance");
+  final DatabaseReference dailyNewsNode = FirebaseDatabase.instance.reference().child("dailyNews");
 
   StatisticModel _statisticModelForPoland;
   StatisticModel _statisticModelForDistrict;
+  List<DailyNewsItemModel> _dailyNews;
+  HashMap<int, AssistanceExtraInformationModel> _assistanceMap;
 
   /// Statistics
   Future<StatisticModel> getStatisticForPoland() async {
@@ -26,6 +30,13 @@ class FirebaseRepository {
     _statisticModelForDistrict = _statisticModelForDistrict ??
         StatisticModel.fromMap((await statisticNode.child("districts").child(districtName).once()).value);
     return _statisticModelForDistrict;
+  }
+
+  /// Daily news
+  Future<List<DailyNewsItemModel>> getDailyNews() async {
+    _dailyNews =
+        _dailyNews ?? ((await dailyNewsNode.once()).value as List).map((it) => DailyNewsItemModel.fromMap(it)).toList();
+    return _dailyNews;
   }
 
   ///Quiz
@@ -43,8 +54,10 @@ class FirebaseRepository {
   Future<String> getInterviewVideoUrl() async => (await interviewNode.child("videoUrl").once()).value;
 
   /// Assistance
-
   Future<HashMap<int, AssistanceExtraInformationModel>> getAssistanceExtraInformationsMap() async {
+    if (_assistanceMap != null) {
+      return _assistanceMap;
+    }
     final map = HashMap<int, AssistanceExtraInformationModel>();
     var model1 = AssistanceExtraInformationModel.fromMap((await assistancewNode.child("1").once()).value);
     map.putIfAbsent(1, () => model1);
@@ -61,6 +74,7 @@ class FirebaseRepository {
     var model5 = AssistanceExtraInformationModel.fromMap((await assistancewNode.child("5").once()).value);
     map.putIfAbsent(5, () => model5);
 
-    return map;
+    _assistanceMap = map;
+    return _assistanceMap;
   }
 }

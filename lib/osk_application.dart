@@ -27,6 +27,7 @@ class OskApplication extends StatelessWidget {
         title: "Osobisty System Komunikacji",
         localizationsDelegates: [S.delegate],
         supportedLocales: S.delegate.supportedLocales,
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           pageTransitionsTheme: PageTransitionsTheme(builders: {TargetPlatform.iOS: CupertinoPageTransitionsBuilder()}),

@@ -55,14 +55,13 @@ class _VideoPageState extends State<VideoPage> {
   }
 
   Widget _buildBody() {
-    var size = MediaQuery.of(context).size;
     return Stack(
       children: <Widget>[
         YoutubePlayer(
           controller: _controller,
           showVideoProgressIndicator: true,
           progressIndicatorColor: AppColors.primaryBlue,
-          aspectRatio: size.width / size.height,
+          aspectRatio: 9 / 18.5,
           progressColors: ProgressBarColors(
             playedColor: AppColors.primaryBlue,
             handleColor: AppColors.primaryBlue.withAlpha(180),
@@ -113,7 +112,6 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   void dispose() {
-    _controller.pause();
     _controller.dispose();
     super.dispose();
   }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:osk_flutter/data/user_repository.dart';
 import 'package:osk_flutter/model/user_model.dart';
 import 'package:osk_flutter/values/app_colors.dart';
@@ -57,7 +58,7 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
         });
         if (userModel?.presumablySick != null && userModel.presumablySick && userModel?.quarantineStartDate == null) {
           _timer?.cancel();
-          _timer = Timer(Duration(seconds: 5), () {
+          _timer = Timer(Duration(seconds: 3), () {
             Navigator.push(context, InterviewCallQuestionPage.pageRoute());
           });
         }
@@ -377,7 +378,9 @@ class _ProfileDashboardState extends State<ProfileDashboard> {
                   title: "Otwórz",
                   height: 47,
                   width: 142,
-                  onClick: () {},
+                  onClick: () {
+                    LaunchReview.launch(androidAppId: "pl.nask.droid.kwarantannadomowa", iOSAppId: "1502997499");
+                  },
                 )
               ],
             ),
