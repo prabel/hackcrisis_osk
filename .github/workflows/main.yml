@@ -22,4 +22,4 @@ jobs:
         uses: maierj/fastlane-action@v1.4.0
         with:
           lane: 'beta'
-          options: '{ "app_id": ${{secrets.FIREBASE_APP_ID}}, "app_token": ${{secrets.FIREBASE_TOKEN}} }'
+          options: '{ "app_id": "${{secrets.FIREBASE_APP_ID}}", "app_token": "${{secrets.FIREBASE_TOKEN}}" }'
