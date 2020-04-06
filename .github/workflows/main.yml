@@ -19,8 +19,11 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk
       - name: upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.1
+        uses: maierj/fastlane-action@v1.4.0
+        env:
+          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+          FIREBASE_APP_ID: ${{secrets.FIREBASE_APP_ID}}
+          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          token: ${{secrets.FIREBASE_TOKEN}}
-          file: build/app/outputs/apk/release/app-release.apk
+          lane: 'beta'
+          options: '{ "app_id": $FIREBASE_APP_ID, "app_token": $FIREBASE_TOKEN }'

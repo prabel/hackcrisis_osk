@@ -1,0 +1,16 @@
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Release on Firebase App Distribution"
+  lane :distribute do |options|
+      firebase_app_distribution(
+          app: options[:app_id],
+          firebase_cli_token: options[:app_token],
+          apk_path: "../../build/app/outputs/apk/release/app-release.apk"
+      )
+  end
+end
