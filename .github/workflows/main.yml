@@ -20,10 +20,6 @@ jobs:
       - run: flutter build apk
       - name: upload artifact to Firebase App Distribution
         uses: maierj/fastlane-action@v1.4.0
-        env:
-          SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
-          FIREBASE_APP_ID: ${{secrets.FIREBASE_APP_ID}}
-          FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
         with:
           lane: 'beta'
-          options: '{ "app_id": ${FIREBASE_APP_ID}, "app_token": ${FIREBASE_TOKEN} }'
+          options: '{ "app_id": ${{secrets.FIREBASE_APP_ID}}, "app_token": ${{secrets.FIREBASE_TOKEN}} }'
