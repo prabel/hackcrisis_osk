@@ -26,4 +26,4 @@ jobs:
           FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
         with:
           lane: 'beta'
-          options: '{ "app_id": $FIREBASE_APP_ID, "app_token": $FIREBASE_TOKEN }'
+          options: '{ "app_id": ${FIREBASE_APP_ID}, "app_token": ${FIREBASE_TOKEN} }'
